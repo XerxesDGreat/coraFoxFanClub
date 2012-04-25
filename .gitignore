@@ -1,0 +1,11 @@
+
+# /
+/stats
+/user_media
+/build
+
+# /administrator/cache/
+/administrator/cache/*
+
+# /cache/
+/cache/*

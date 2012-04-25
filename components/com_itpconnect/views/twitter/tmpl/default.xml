@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Twitter Layout">
+		<message>
+			<![CDATA[It is a twitter layout]]>
+		</message>
+	</layout>
+	<state>
+        <name>Twitter layout</name>
+        <description>It is a result of twitter login.</description>
+        <url>
+            <param name="controller" type="hidden" default="twitter" />
+        </url>
+    </state>
+</metadata>

@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="content" method="upgrade">
+	<name>Content - JPlayer</name>
+	<author>MaxSVK</author>
+	<authorEmail>max.lv@centrum.sk</authorEmail>
+	<authorUrl>http://vault.futurama.sk/joomla/</authorUrl>
+	<copyright>Copyright (c) 2010 Max. All rights reserved.</copyright>
+	<creationDate>2011-05-29</creationDate>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU GPLv2</license>
+	<version>1.5.4</version>
+	<description>PLG_JPLAYER_THANKS_FOR_INSTALLING</description>
+
+	<params addpath="/plugins/content/jplayer/elements">
+
+		<param name="" type="header" default="PLG_JPLAYER_VIDEO_PARAMETERS" label="" description="" />
+		<param name="videofolder" type="text" default="media/video" size="40" label="PLG_JPLAYER_VIDEO_FOLDER" description="PLG_JPLAYER_VIDEO_FOLDER_DESC" />
+		<param name="videowidth" type="text" default="400" size="4" label="PLG_JPLAYER_VIDEO_WIDTH" description="" />
+		<param name="videoheight" type="text" default="300" size="4" label="PLG_JPLAYER_VIDEO_HEIGHT" description="" />
+
+		<param name="" type="header" default="PLG_JPLAYER_AUDIO_PARAMETERS" label="" description="" />
+		<param name="audiofolder" type="text" default="media/audio" size="40" label="PLG_JPLAYER_AUDIO_FOLDER" description="PLG_JPLAYER_AUDIO_FOLDER_DESC" />
+		<param name="audiowidth" type="text" default="300" size="4" label="PLG_JPLAYER_AUDIO_WIDTH" description="" />
+		<param name="audioheight" type="text" default="20" size="4" label="PLG_JPLAYER_AUDIO_HEIGHT" description="" />
+
+		<param name="" type="header" default="PLG_JPLAYER_YOUTUBE_PARAMETERS" label="" description="" />
+		<param name="youtuberelated" type="radio" default="1" label="PLG_JPLAYER_RELATED_VIDEOS" description="PLG_JPLAYER_RELATED_VIDEOS_DESC">
+			<option value="0">PLG_JPLAYER_NO</option>
+			<option value="1">PLG_JPLAYER_YES</option>
+		</param>
+		<param name="youtubeborder" type="radio" default="0" label="PLG_JPLAYER_BORDERS" description="PLG_JPLAYER_BORDERS_DESC">
+			<option value="0">PLG_JPLAYER_NO</option>
+			<option value="1">PLG_JPLAYER_YES</option>
+		</param>
+		<param name="youtubecolors" type="list" default="0" label="PLG_JPLAYER_COLORS" description="PLG_JPLAYER_COLORS_DESC">
+			<option value="0">PLG_JPLAYER_DEFAULT</option>
+			<option value="1">PLG_JPLAYER_COLORS_1</option>
+			<option value="2">PLG_JPLAYER_COLORS_2</option>
+			<option value="3">PLG_JPLAYER_COLORS_3</option>
+			<option value="4">PLG_JPLAYER_COLORS_4</option>
+			<option value="5">PLG_JPLAYER_COLORS_5</option>
+			<option value="6">PLG_JPLAYER_COLORS_6</option>
+			<option value="7">PLG_JPLAYER_COLORS_7</option>
+			<option value="8">PLG_JPLAYER_COLORS_8</option>
+		</param>
+		<param name="youtuberesolution" type="list" default="2" label="PLG_JPLAYER_RESOLUTION" description="PLG_JPLAYER_RESOLUTION_DESC">
+			<option value="1">425x344</option>
+			<option value="2">480x385</option>
+			<option value="3">640x505</option>
+			<option value="4">960x745</option>
+			<option value="5">PLG_JPLAYER_CUSTOM</option>
+		</param>
+		<param name="youtubewidth" type="text" default="480" size="4" label="PLG_JPLAYER_CUSTOM_WIDTH" description="" />
+		<param name="youtubeheight" type="text" default="385" size="4" label="PLG_JPLAYER_CUSTOM_HEIGHT" description="" />
+
+		<param name="" type="header" default="PLG_JPLAYER_PLAYLIST_PARAMETERS" label="" description="" />
+		<param name="playlistfolder" type="text" default="media/playlist" size="40" label="PLG_JPLAYER_PLAYLIST_FOLDER" description="PLG_JPLAYER_PLAYLIST_FOLDER_DESC" />
+		<param name="playlistsize" type="text" default="350" size="4" label="PLG_JPLAYER_PLAYLIST_SIZE" description="PLG_JPLAYER_PLAYLIST_SIZE_DESC" />
+		<param name="playlistposition" type="list" default="bottom" label="PLG_JPLAYER_PLAYLIST_POSITION" description="">
+			<option value="top">PLG_JPLAYER_TOP</option>
+			<option value="bottom">PLG_JPLAYER_BOTTOM</option>
+		</param>
+		<param name="shuffle" type="radio" default="0" label="PLG_JPLAYER_SHUFFLE" description="PLG_JPLAYER_SHUFFLE_DESC">
+			<option value="0">PLG_JPLAYER_NO</option>
+			<option value="1">PLG_JPLAYER_YES</option>
+		</param>
+
+		<param name="" type="header" default="PLG_JPLAYER_PLAYER_PARAMETERS" label="" description="" />
+		<param name="playerversion" type="list" default="default" label="PLG_JPLAYER_PLAYER_VERSION" description="PLG_JPLAYER_PLAYER_VERSION_DESC">
+			<option value="4-3-132">4.3.132</option>
+			<option value="4-7-811">4.7.811</option>
+		</param>
+		<param name="controlbar" type="list" default="bottom" label="PLG_JPLAYER_CONTROLBAR_POSITION" description="">
+			<option value="top">PLG_JPLAYER_TOP</option>
+			<option value="bottom">PLG_JPLAYER_BOTTOM</option>
+			<option value="none">PLG_JPLAYER_NONE</option>
+		</param>
+		<param name="transparency" type="radio" default="transparent" label="PLG_JPLAYER_PLAYER_TRANSPARENCY" description="">
+			<option value="opaque">PLG_JPLAYER_NO</option>
+			<option value="transparent">PLG_JPLAYER_YES</option>
+		</param>
+		<param name="background" type="text" default="#FFFFFF" size="7" label="PLG_JPLAYER_BACKGROUND_COLOR" description="PLG_JPLAYER_BACKGROUND_COLOR_DESC" />
+		<param name="backcolor" type="text" default="" size="7" label="PLG_JPLAYER_PLAYER_BACKCOLOR" description="PLG_JPLAYER_PLAYER_BACKCOLOR_DESC" />
+		<param name="frontcolor" type="text" default="" size="7" label="PLG_JPLAYER_PLAYER_FRONTCOLOR" description="PLG_JPLAYER_PLAYER_FRONTCOLOR_DESC" />
+		<param name="lightcolor" type="text" default="" size="7" label="PLG_JPLAYER_PLAYER_LIGHTCOLOR" description="PLG_JPLAYER_PLAYER_LIGHTCOLOR_DESC" />
+		<param name="screencolor" type="text" default="" size="7" label="PLG_JPLAYER_PLAYER_SCREENCOLOR" description="PLG_JPLAYER_PLAYER_SCREENCOLOR_DESC" />
+
+		<param name="" type="header" default="PLG_JPLAYER_GENERAL_PARAMETERS" label="" description="" />
+		<param name="fullscreen" type="radio" default="1" label="PLG_JPLAYER_FULLSCREEN" description="PLG_JPLAYER_FULLSCREEN_DESC">
+			<option value="0">PLG_JPLAYER_NO</option>
+			<option value="1">PLG_JPLAYER_YES</option>
+		</param>
+		<param name="autoplay" type="radio" default="0" label="PLG_JPLAYER_AUTOPLAY" description="PLG_JPLAYER_AUTOPLAY_DESC">
+			<option value="0">PLG_JPLAYER_NO</option>
+			<option value="1">PLG_JPLAYER_YES</option>
+		</param>
+		<param name="repeat" type="list" default="none" label="PLG_JPLAYER_REPEAT" description="PLG_JPLAYER_REPEAT_DESC">
+			<option value="none">PLG_JPLAYER_NO</option>
+			<option value="always">PLG_JPLAYER_ALWAYS</option>
+			<option value="single">PLG_JPLAYER_SINGLE</option>
+		</param>
+		<param name="downloadLink" type="radio" default="1" label="PLG_JPLAYER_DOWNLOAD_LINK" description="PLG_JPLAYER_DOWNLOAD_LINK_DESC">
+			<option value="0">PLG_JPLAYER_NO</option>
+			<option value="1">PLG_JPLAYER_YES</option>
+		</param>
+		<param name="skin" type="text" default="" size="40" label="PLG_JPLAYER_SKIN" description="PLG_JPLAYER_SKIN_DESC" />
+		<param name="logo" type="text" default="" size="40" label="PLG_JPLAYER_LOGO" description="PLG_JPLAYER_LOGO_DESC" />
+		<param name="jplayerLink" type="radio" default="0" label="PLG_JPLAYER_JPLAYER_LINK" description="PLG_JPLAYER_JPLAYER_LINK_DESC">
+			<option value="0">PLG_JPLAYER_NO</option>
+			<option value="1">PLG_JPLAYER_YES</option>
+		</param>
+		<param name="registeredonly" type="radio" default="0" label="PLG_JPLAYER_REGISTERED_ONLY" description="">
+			<option value="0">PLG_JPLAYER_NO</option>
+			<option value="1">PLG_JPLAYER_YES</option>
+		</param>
+		<param name="registeredonlymsg" type="text" default="Only registered users can view player" size="50" label="PLG_JPLAYER_REGISTERED_ONLY_MSG" description="" />
+	</params>
+
+	<params group="advanced">
+		<param name="debugMode" type="radio" default="0" label="PLG_JPLAYER_DEBUG_MODE" description="PLG_JPLAYER_DEBUG_MODE_DESC">
+			<option value="0">PLG_JPLAYER_DISABLED</option>
+			<option value="1">PLG_JPLAYER_ENABLED</option>
+		</param>
+	</params>
+
+	<files>
+		<filename plugin="jplayer">jplayer.php</filename>
+		<folder>jplayer</folder>
+	</files>
+
+	<languages>
+		<language tag="en-GB">en-GB.plg_content_jplayer.ini</language>
+	</languages>
+
+</install>

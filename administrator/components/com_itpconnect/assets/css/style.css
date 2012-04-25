@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+.icon-48-itp-settings 	{ background-image: url(../../assets/images/settings_48.png); }
+.icon-48-itp-users 	    { background-image: url(../../assets/images/users_48.png); }
+.icon-48-itp-properties { background-image: url(../../assets/images/properties_48.png); }
+
+#itp-cpanel {
+      width: 400px;
+      height: 400px;
+      float: left;
+}
+
+#itp-itprism {
+    width: 400px;
+    height: 400px;
+    float: right;
+    text-align:center;
+}
+
+
+#itp-cpanel span {
+
+    display: block;
+    text-align: center;
+
+}
+
+.itp-cpitem {
+  float:left;
+  text-align: center;
+  margin: 0 5px 5px 0;
+
+}
+
+.itp-cpitem a {
+  display:block;
+  width: 120px;
+  height: 100px;
+  border: thin solid #E1E1E1;
+  vertical-align: middle;
+  text-decoration: none;
+  float:left;
+  color: #808080 !important;
+}
+
+.itp-cpitem:hover a {
+    border: thin outset #E1E1E1;
+    background: #FFF5EC none repeat scroll 0;
+    color: #0B55C4 !important;
+    text-decoration: none;
+}
+
+
+.itp-cpitem img {
+  padding: 10px;
+}
+

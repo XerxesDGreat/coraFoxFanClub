@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <params group="facebook">
+        <param name="facebookOn" type="radio" default="1" label="COM_ITPCONNECT_FB_ON" description="COM_ITPCONNECT_FB_ON_DESC"  >
+	       <option value="0">No</option>
+	       <option value="1">Yes</option>
+	    </param>
+        <param name="facebookAppId" type="text" default="" size="80" label="COM_ITPCONNECT_FB_APP_ID" description="COM_ITPCONNECT_FB_APP_ID_DESC" />
+        <param name="facebookSecret" type="text" default="" size="80" label="COM_ITPCONNECT_FB_APP_SECRET" description="COM_ITPCONNECT_FB_APP_SECRET_DESC" />
+        <param name="fbDynamicLocale" type="radio" default="1" label="COM_ITPCONNECT_DYN_LOCALE" description="COM_ITPCONNECT_DYN_LOCALE_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </param>
+        <param name="fbLocale" type="list" default="en_US" label="COM_ITPCONNECT_LANGUAGE" description="COM_ITPCONNECT_LANGUAGE_DESC">
+            <option value="af_ZA">COM_ITPCONNECT_AF_ZA</option>
+            <option value="ar_AR">COM_ITPCONNECT_AR_AR</option>
+            <option value="ay_BO">COM_ITPCONNECT_AY_BO</option>
+            <option value="az_AZ">COM_ITPCONNECT_AZ_AZ</option>
+            <option value="be_BY">COM_ITPCONNECT_BE_BY</option>
+            <option value="bg_BG">COM_ITPCONNECT_BG_BG</option>
+            <option value="bn_IN">COM_ITPCONNECT_BN_IN</option>
+            <option value="bs_BA">COM_ITPCONNECT_BS_BA</option>
+            <option value="ca_ES">COM_ITPCONNECT_CA_ES</option>
+            <option value="ck_US">COM_ITPCONNECT_CK_US</option>
+            <option value="cs_CZ">COM_ITPCONNECT_CS_CZ</option>
+            <option value="cy_GB">COM_ITPCONNECT_CY_GB</option>
+            <option value="da_DK">COM_ITPCONNECT_DA_DK</option>
+            <option value="de_DE">COM_ITPCONNECT_DE_DE</option>
+            <option value="el_GR">COM_ITPCONNECT_EL_GR</option>
+            <option value="en_GB">COM_ITPCONNECT_EN_GB</option>
+            <option value="en_PI">COM_ITPCONNECT_EN_PI</option>
+            <option value="en_UD">COM_ITPCONNECT_EN_UD</option>
+            <option value="en_US">COM_ITPCONNECT_EN_US</option>
+            <option value="eo_EO">COM_ITPCONNECT_EO_EO</option>
+            <option value="es_CL">COM_ITPCONNECT_ES_CL</option>
+            <option value="es_CO">COM_ITPCONNECT_ES_CO</option>
+            <option value="es_ES">COM_ITPCONNECT_ES_ES</option>
+            <option value="es_LA">COM_ITPCONNECT_ES_LA</option>
+            <option value="es_MX">COM_ITPCONNECT_ES_MX</option>
+            <option value="es_VE">COM_ITPCONNECT_ES_MX</option>
+            <option value="et_EE">COM_ITPCONNECT_ET_EE</option>
+            <option value="eu_ES">COM_ITPCONNECT_EU_ES</option>
+            <option value="fa_IR">COM_ITPCONNECT_FA_IR</option>
+            <option value="fb_LT">COM_ITPCONNECT_FB_LT</option>
+            <option value="fi_FI">COM_ITPCONNECT_FI_FI</option>
+            <option value="fo_FO">COM_ITPCONNECT_FO_FO</option>
+            <option value="fr_CA">COM_ITPCONNECT_FR_CA</option>
+            <option value="fr_FR">COM_ITPCONNECT_FR_FR</option>
+            <option value="ga_IE">COM_ITPCONNECT_GA_IE</option>
+            <option value="gl_ES">COM_ITPCONNECT_GL_ES</option>
+            <option value="gn_PY">COM_ITPCONNECT_GN_PY</option>
+            <option value="gu_IN">COM_ITPCONNECT_GU_IN</option>
+            <option value="he_IL">COM_ITPCONNECT_HE_IL</option>
+            <option value="hi_IN">COM_ITPCONNECT_HI_IN</option>
+            <option value="hr_HR">COM_ITPCONNECT_HR_HR</option>
+            <option value="hu_HU">COM_ITPCONNECT_HU_HU</option>
+            <option value="hy_AM">COM_ITPCONNECT_HY_AM</option>
+            <option value="id_ID">COM_ITPCONNECT_ID_ID</option>
+            <option value="is_IS">COM_ITPCONNECT_IS_IS</option>
+            <option value="it_IT">COM_ITPCONNECT_IT_IT</option>
+            <option value="ja_JP">COM_ITPCONNECT_JA_JP</option>
+            <option value="jv_ID">COM_ITPCONNECT_JV_ID</option>
+            <option value="ka_GE">COM_ITPCONNECT_KA_GE</option>
+            <option value="kk_KZ">COM_ITPCONNECT_KK_KZ</option>
+            <option value="km_KH">COM_ITPCONNECT_KM_KH</option>
+            <option value="kn_IN">COM_ITPCONNECT_KN_IN</option>
+            <option value="ko_KR">COM_ITPCONNECT_KO_KR</option>
+            <option value="ku_TR">COM_ITPCONNECT_KU_TR</option>
+            <option value="la_VA">COM_ITPCONNECT_LA_VA</option>
+            <option value="li_NL">COM_ITPCONNECT_LI_NL</option>
+            <option value="lt_LT">COM_ITPCONNECT_LT_LT</option>
+            <option value="lv_LV">COM_ITPCONNECT_LV_LV</option>
+            <option value="mg_MG">COM_ITPCONNECT_MG_MG</option>
+            <option value="mk_MK">COM_ITPCONNECT_MK_MK</option>
+            <option value="ml_IN">COM_ITPCONNECT_ML_IN</option>
+            <option value="mn_MN">COM_ITPCONNECT_MN_MN</option>
+            <option value="mr_IN">COM_ITPCONNECT_MR_IN</option>
+            <option value="ms_MY">COM_ITPCONNECT_MS_MY</option>
+            <option value="mt_MT">COM_ITPCONNECT_MT_MT</option>
+            <option value="nb_NO">COM_ITPCONNECT_NB_NO</option>
+            <option value="ne_NP">COM_ITPCONNECT_NE_NP</option>
+            <option value="nl_BE">COM_ITPCONNECT_NL_BE</option>
+            <option value="nl_NL">COM_ITPCONNECT_NL_NL</option>
+            <option value="nn_NO">COM_ITPCONNECT_NN_NO</option>
+            <option value="pa_IN">COM_ITPCONNECT_PA_IN</option>
+            <option value="pl_PL">COM_ITPCONNECT_PL_PL</option>
+            <option value="ps_AF">COM_ITPCONNECT_PS_AF</option>
+            <option value="pt_BR">COM_ITPCONNECT_PT_BR</option>
+            <option value="pt_PT">COM_ITPCONNECT_PT_PT</option>
+            <option value="qu_PE">COM_ITPCONNECT_QU_PE</option>
+            <option value="rm_CH">COM_ITPCONNECT_RM_CH</option>
+            <option value="ro_RO">COM_ITPCONNECT_RO_RO</option>
+            <option value="ru_RU">COM_ITPCONNECT_RU_RU</option>
+            <option value="sa_IN">COM_ITPCONNECT_SA_IN</option>
+            <option value="se_NO">COM_ITPCONNECT_SE_NO</option>
+            <option value="sk_SK">COM_ITPCONNECT_SK_SK</option>
+            <option value="sl_SI">COM_ITPCONNECT_SL_SI</option>
+            <option value="so_SO">COM_ITPCONNECT_SO_SO</option>
+            <option value="sq_AL">COM_ITPCONNECT_SQ_AL</option>
+            <option value="sr_RS">COM_ITPCONNECT_SR_RS</option>
+            <option value="sv_SE">COM_ITPCONNECT_SV_SE</option>
+            <option value="sw_KE">COM_ITPCONNECT_SW_KE</option>
+            <option value="sy_SY">COM_ITPCONNECT_SY_SY</option>
+            <option value="ta_IN">COM_ITPCONNECT_TA_IN</option>
+            <option value="te_IN">COM_ITPCONNECT_TE_IN</option>
+            <option value="tg_TJ">COM_ITPCONNECT_TG_TJ</option>
+            <option value="th_TH">COM_ITPCONNECT_TH_TH</option>
+            <option value="tl_PH">COM_ITPCONNECT_TL_PH</option>
+            <option value="tl_ST">COM_ITPCONNECT_TL_ST</option>
+            <option value="tr_TR">COM_ITPCONNECT_TR_TR</option>
+            <option value="tt_RU">COM_ITPCONNECT_TT_RU</option>
+            <option value="uk_UA">COM_ITPCONNECT_UK_UA</option>
+            <option value="ur_PK">COM_ITPCONNECT_UR_PK</option>
+            <option value="uz_UZ">COM_ITPCONNECT_UZ_UZ</option>
+            <option value="vi_VN">COM_ITPCONNECT_VI_VN</option>
+            <option value="xh_ZA">COM_ITPCONNECT_XH_ZA</option>
+            <option value="yi_DE">COM_ITPCONNECT_YI_DE</option>
+            <option value="zh_CN">COM_ITPCONNECT_ZH_CN</option>
+            <option value="zh_HK">COM_ITPCONNECT_ZH_HK</option>
+            <option value="zh_TW">COM_ITPCONNECT_ZH_TW</option>
+            <option value="zu_ZA">COM_ITPCONNECT_ZU_ZA</option>
+        </param>
+        <param name="fbDisplayAjaxLoader" type="radio" default="0" label="COM_ITPCONNECT_AJAX_LOADER" description="COM_ITPCONNECT_AJAX_LOADER_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </param>
+        <param name="fbSendConfirmationMail" type="radio" default="0" label="COM_ITPCONNECT_CONF_MAIL" description="COM_ITPCONNECT_CONF_MAIL_DESC">
+            <option value="0">JNO</option>
+            <option value="1">JYES</option>
+        </param>   
+    </params>
+     <!-- 
+    <params group="twitter">
+        <param name="twitterApiKey" type="text" default="" size="80" label="COM_ITPCONNECT_TWITTER_KEY" description="COM_ITPCONNECT_TWITTER_KEY_DESC" />
+        <param name="twitterSecret" type="text" default="" size="80" label="COM_ITPCONNECT_TWITTER_SECRET" description="COM_ITPCONNECT_TWITTER_SECRET_DESC" />
+    </params>
+    -->
+</root>

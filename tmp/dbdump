@@ -1,0 +1,1427 @@
+-- MySQL dump 10.11
+--
+-- Host: corajoomla15.db.8047279.hostedresource.com    Database: corajoomla15
+-- ------------------------------------------------------
+-- Server version	5.0.91-log
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `jos_banner`
+--
+
+DROP TABLE IF EXISTS `jos_banner`;
+CREATE TABLE `jos_banner` (
+  `bid` int(11) NOT NULL auto_increment,
+  `cid` int(11) NOT NULL default '0',
+  `type` varchar(30) NOT NULL default 'banner',
+  `name` varchar(255) NOT NULL default '',
+  `alias` varchar(255) NOT NULL default '',
+  `imptotal` int(11) NOT NULL default '0',
+  `impmade` int(11) NOT NULL default '0',
+  `clicks` int(11) NOT NULL default '0',
+  `imageurl` varchar(100) NOT NULL default '',
+  `clickurl` varchar(200) NOT NULL default '',
+  `date` datetime default NULL,
+  `showBanner` tinyint(1) NOT NULL default '0',
+  `checked_out` tinyint(1) NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `editor` varchar(50) default NULL,
+  `custombannercode` text,
+  `catid` int(10) unsigned NOT NULL default '0',
+  `description` text NOT NULL,
+  `sticky` tinyint(1) unsigned NOT NULL default '0',
+  `ordering` int(11) NOT NULL default '0',
+  `publish_up` datetime NOT NULL default '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL default '0000-00-00 00:00:00',
+  `tags` text NOT NULL,
+  `params` text NOT NULL,
+  PRIMARY KEY  (`bid`),
+  KEY `viewbanner` (`showBanner`),
+  KEY `idx_banner_catid` (`catid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_banner`
+--
+
+LOCK TABLES `jos_banner` WRITE;
+/*!40000 ALTER TABLE `jos_banner` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_banner` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_bannerclient`
+--
+
+DROP TABLE IF EXISTS `jos_bannerclient`;
+CREATE TABLE `jos_bannerclient` (
+  `cid` int(11) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL default '',
+  `contact` varchar(255) NOT NULL default '',
+  `email` varchar(255) NOT NULL default '',
+  `extrainfo` text NOT NULL,
+  `checked_out` tinyint(1) NOT NULL default '0',
+  `checked_out_time` time default NULL,
+  `editor` varchar(50) default NULL,
+  PRIMARY KEY  (`cid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_bannerclient`
+--
+
+LOCK TABLES `jos_bannerclient` WRITE;
+/*!40000 ALTER TABLE `jos_bannerclient` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_bannerclient` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_bannertrack`
+--
+
+DROP TABLE IF EXISTS `jos_bannertrack`;
+CREATE TABLE `jos_bannertrack` (
+  `track_date` date NOT NULL,
+  `track_type` int(10) unsigned NOT NULL,
+  `banner_id` int(10) unsigned NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_bannertrack`
+--
+
+LOCK TABLES `jos_bannertrack` WRITE;
+/*!40000 ALTER TABLE `jos_bannertrack` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_bannertrack` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_categories`
+--
+
+DROP TABLE IF EXISTS `jos_categories`;
+CREATE TABLE `jos_categories` (
+  `id` int(11) NOT NULL auto_increment,
+  `parent_id` int(11) NOT NULL default '0',
+  `title` varchar(255) NOT NULL default '',
+  `name` varchar(255) NOT NULL default '',
+  `alias` varchar(255) NOT NULL default '',
+  `image` varchar(255) NOT NULL default '',
+  `section` varchar(50) NOT NULL default '',
+  `image_position` varchar(30) NOT NULL default '',
+  `description` text NOT NULL,
+  `published` tinyint(1) NOT NULL default '0',
+  `checked_out` int(11) unsigned NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `editor` varchar(50) default NULL,
+  `ordering` int(11) NOT NULL default '0',
+  `access` tinyint(3) unsigned NOT NULL default '0',
+  `count` int(11) NOT NULL default '0',
+  `params` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `cat_idx` (`section`,`published`,`access`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`)
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_categories`
+--
+
+LOCK TABLES `jos_categories` WRITE;
+/*!40000 ALTER TABLE `jos_categories` DISABLE KEYS */;
+INSERT INTO `jos_categories` VALUES (1,0,'Default','Default','','','com_jevents','left','',1,0,'0000-00-00 00:00:00',NULL,0,0,0,''),(2,0,'uncategorized','','uncategorized','','1','left','',1,0,'0000-00-00 00:00:00',NULL,1,0,0,''),(3,0,'uncategorized','','uncategorized','','2','left','',1,0,'0000-00-00 00:00:00',NULL,1,0,0,''),(4,0,'uncategorized','','uncategorized','','3','left','',1,0,'0000-00-00 00:00:00',NULL,1,0,0,''),(5,0,'Viewable','','viewable','','4','left','',1,0,'0000-00-00 00:00:00',NULL,1,0,0,''),(6,0,'Photos','','photos','','5','left','',1,0,'0000-00-00 00:00:00',NULL,1,0,0,''),(7,0,'Links','','links','','5','left','',1,0,'0000-00-00 00:00:00',NULL,2,0,0,'');
+/*!40000 ALTER TABLE `jos_categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_components`
+--
+
+DROP TABLE IF EXISTS `jos_components`;
+CREATE TABLE `jos_components` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(50) NOT NULL default '',
+  `link` varchar(255) NOT NULL default '',
+  `menuid` int(11) unsigned NOT NULL default '0',
+  `parent` int(11) unsigned NOT NULL default '0',
+  `admin_menu_link` varchar(255) NOT NULL default '',
+  `admin_menu_alt` varchar(255) NOT NULL default '',
+  `option` varchar(50) NOT NULL default '',
+  `ordering` int(11) NOT NULL default '0',
+  `admin_menu_img` varchar(255) NOT NULL default '',
+  `iscore` tinyint(4) NOT NULL default '0',
+  `params` text NOT NULL,
+  `enabled` tinyint(4) NOT NULL default '1',
+  PRIMARY KEY  (`id`),
+  KEY `parent_option` (`parent`,`option`(32))
+) ENGINE=MyISAM AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_components`
+--
+
+LOCK TABLES `jos_components` WRITE;
+/*!40000 ALTER TABLE `jos_components` DISABLE KEYS */;
+INSERT INTO `jos_components` VALUES (1,'Banners','',0,0,'','Banner Management','com_banners',0,'js/ThemeOffice/component.png',0,'track_impressions=0\ntrack_clicks=0\ntag_prefix=\n\n',1),(2,'Banners','',0,1,'option=com_banners','Active Banners','com_banners',1,'js/ThemeOffice/edit.png',0,'',1),(3,'Clients','',0,1,'option=com_banners&c=client','Manage Clients','com_banners',2,'js/ThemeOffice/categories.png',0,'',1),(4,'Web Links','option=com_weblinks',0,0,'','Manage Weblinks','com_weblinks',0,'js/ThemeOffice/component.png',0,'show_comp_description=1\ncomp_description=\nshow_link_hits=1\nshow_link_description=1\nshow_other_cats=1\nshow_headings=1\nshow_page_title=1\nlink_target=0\nlink_icons=\n\n',1),(5,'Links','',0,4,'option=com_weblinks','View existing weblinks','com_weblinks',1,'js/ThemeOffice/edit.png',0,'',1),(6,'Categories','',0,4,'option=com_categories&section=com_weblinks','Manage weblink categories','',2,'js/ThemeOffice/categories.png',0,'',1),(7,'Contacts','option=com_contact',0,0,'','Edit contact details','com_contact',0,'js/ThemeOffice/component.png',1,'contact_icons=0\nicon_address=\nicon_email=\nicon_telephone=\nicon_fax=\nicon_misc=\nshow_headings=1\nshow_position=1\nshow_email=0\nshow_telephone=1\nshow_mobile=1\nshow_fax=1\nbannedEmail=\nbannedSubject=\nbannedText=\nsession=1\ncustomReply=0\n\n',1),(8,'Contacts','',0,7,'option=com_contact','Edit contact details','com_contact',0,'js/ThemeOffice/edit.png',1,'',1),(9,'Categories','',0,7,'option=com_categories&section=com_contact_details','Manage contact categories','',2,'js/ThemeOffice/categories.png',1,'contact_icons=0\nicon_address=\nicon_email=\nicon_telephone=\nicon_fax=\nicon_misc=\nshow_headings=1\nshow_position=1\nshow_email=0\nshow_telephone=1\nshow_mobile=1\nshow_fax=1\nbannedEmail=\nbannedSubject=\nbannedText=\nsession=1\ncustomReply=0\n\n',1),(10,'Polls','option=com_poll',0,0,'option=com_poll','Manage Polls','com_poll',0,'js/ThemeOffice/component.png',0,'',1),(11,'News Feeds','option=com_newsfeeds',0,0,'','News Feeds Management','com_newsfeeds',0,'js/ThemeOffice/component.png',0,'',1),(12,'Feeds','',0,11,'option=com_newsfeeds','Manage News Feeds','com_newsfeeds',1,'js/ThemeOffice/edit.png',0,'show_headings=1\nshow_name=1\nshow_articles=1\nshow_link=1\nshow_cat_description=1\nshow_cat_items=1\nshow_feed_image=1\nshow_feed_description=1\nshow_item_description=1\nfeed_word_count=0\n\n',1),(13,'Categories','',0,11,'option=com_categories&section=com_newsfeeds','Manage Categories','',2,'js/ThemeOffice/categories.png',0,'',1),(14,'User','option=com_user',0,0,'','','com_user',0,'',1,'',1),(15,'Search','option=com_search',0,0,'option=com_search','Search Statistics','com_search',0,'js/ThemeOffice/component.png',1,'enabled=0\n\n',1),(16,'Categories','',0,1,'option=com_categories&section=com_banner','Categories','',3,'',1,'',1),(17,'Wrapper','option=com_wrapper',0,0,'','Wrapper','com_wrapper',0,'',1,'',1),(18,'Mail To','',0,0,'','','com_mailto',0,'',1,'',1),(19,'Media Manager','',0,0,'option=com_media','Media Manager','com_media',0,'',1,'upload_extensions=bmp,csv,doc,epg,gif,ico,jpg,odg,odp,ods,odt,pdf,png,ppt,swf,txt,xcf,xls,BMP,CSV,DOC,EPG,GIF,ICO,JPG,ODG,ODP,ODS,ODT,PDF,PNG,PPT,SWF,TXT,XCF,XLS\nupload_maxsize=10000000\nfile_path=images\nimage_path=images/stories\nrestrict_uploads=1\nallowed_media_usergroup=3\ncheck_mime=1\nimage_extensions=bmp,gif,jpg,png\nignore_extensions=\nupload_mime=image/jpeg,image/gif,image/png,image/bmp,application/x-shockwave-flash,application/msword,application/excel,application/pdf,application/powerpoint,text/plain,application/x-zip\nupload_mime_illegal=text/html\nenable_flash=1\n\n',1),(20,'Articles','option=com_content',0,0,'','','com_content',0,'',1,'show_noauth=0\nshow_title=1\nlink_titles=0\nshow_intro=1\nshow_section=0\nlink_section=0\nshow_category=0\nlink_category=0\nshow_author=1\nshow_create_date=1\nshow_modify_date=0\nshow_item_navigation=0\nshow_readmore=1\nshow_vote=0\nshow_icons=0\nshow_pdf_icon=0\nshow_print_icon=0\nshow_email_icon=0\nshow_hits=0\nfeed_summary=0\nfilter_tags=\nfilter_attritbutes=\n\n',1),(21,'Configuration Manager','',0,0,'','Configuration','com_config',0,'',1,'',1),(22,'Installation Manager','',0,0,'','Installer','com_installer',0,'',1,'',1),(23,'Language Manager','',0,0,'','Languages','com_languages',0,'',1,'',1),(24,'Mass mail','',0,0,'','Mass Mail','com_massmail',0,'',1,'mailSubjectPrefix=\nmailBodySuffix=\n\n',1),(25,'Menu Editor','',0,0,'','Menu Editor','com_menus',0,'',1,'',1),(27,'Messaging','',0,0,'','Messages','com_messages',0,'',1,'',1),(28,'Modules Manager','',0,0,'','Modules','com_modules',0,'',1,'',1),(29,'Plugin Manager','',0,0,'','Plugins','com_plugins',0,'',1,'',1),(30,'Template Manager','',0,0,'','Templates','com_templates',0,'',1,'',1),(31,'User Manager','',0,0,'','Users','com_users',0,'',1,'allowUserRegistration=1\nnew_usertype=Registered\nuseractivation=1\nfrontend_userparams=1\n\n',1),(32,'Cache Manager','',0,0,'','Cache','com_cache',0,'',1,'',1),(33,'Control Panel','',0,0,'','Control Panel','com_cpanel',0,'',1,'',1),(34,'JEvents MVC','option=com_jevents',0,0,'option=com_jevents','JEvents MVC','com_jevents',0,'js/ThemeOffice/component.png',0,'com_calViewName=geraint\ndarktemplate=0\ncom_dateformat=1\ncom_calUseStdTime=1\ncom_blockRobots=0\nrobotprior=-1 month\nrobotpost=+1 month\ncom_cache=0\ncom_calHeadline=comp\ncom_calUseIconic=1\ncom_navbarcolor=green\ncom_earliestyear=2011\ncom_latestyear=2015\ncom_starday=0\ncom_print_icon_view=0\ncom_email_icon_view=0\ncom_hideshowbycats=1\ninstalllayouts=1\ncom_copyright=0\nlargeDataSetLimit=100000\nshowPanelNews=1\nhideMigration=1\nicaltimezonelive=America/Los_Angeles\nregexsearch=1\ncatseparator=\\|\nallowraw=0\njevadmin=62\nauthorisedonly=0\njevcreator_level=19\njeveditor_level=20\njevpublish_level=21\njevpublishown=0\nicaltimezone=\nicalkey=secret phrase\nshowicalicon=0\ndisableicalexport=0\noutlook2003icalexport=0\nicalmultiday=0\nicalmultiday24h=0\nfeimport=0\nallowedit=0\nicalformatted=0\neditpopup=0\ndisablerepeats=0\npopupw=800\npopuph=500\ndefaultcat=0\nforcepopupcalendar=1\ncom_calForceCatColorEventForm=2\ncom_single_pane_edit=0\ntimebeforedescription=0\ncom_show_editor_buttons=0\ncom_editor_button_exceptions=pagebreak,readmore\ncom_notifyboth=0\ncom_notifyallevents=0\ncom_notifyauthor=0\nshowpriority=0\nmultiday=1\ndefaultstarttime=08:00\ndefaultendtime=17:00\ncom_byview=1\ncom_mailview=1\ncom_hitsview=1\ncom_repeatview=1\ncom_calCutTitle=15\ncom_calMaxDisplay=15\ncom_calDisplayStarttime=1\ncom_enableToolTip=1\ntooltiptype=joomla\ncom_calTTBackground=1\ncom_calTTPosX=LEFT\ncom_calTTPosY=BELOW\ncom_calTTShadow=0\ncom_calTTShadowX=0\ncom_calTTShadowY=0\ncom_calEventListRowsPpg=10\nshowyearpast=1\ncom_showrepeats=1\nshowyeardate=0\ncom_rss_cache=1\ncom_rss_cache_time=3600\ncom_rss_count=5\ncom_rss_live_bookmarks=1\ncom_rss_modid=0\ncom_rss_title=JEvents Syndication for Joomla\ncom_rss_description=Powered by JEvents!\ncom_rss_limit_text=0\ncom_rss_text_length=20\ncom_rss_logo=\nmodcal_DispLastMonth=NO\nmodcal_DispLastMonthDays=0\nmodcal_DispNextMonth=NO\nmodcal_DispNextMonthDays=0\nmodcal_LinkCloaking=0\nmodlatest_MaxEvents=10\nmodlatest_Mode=0\nmodlatest_Days=5\nstartnow=0\nmodlatest_NoRepeat=1\nmodlatest_DispLinks=1\nmodlatest_DispYear=0\nmodlatest_DisDateStyle=0\nmodlatest_DisTitleStyle=0\nmodlatest_LinkToCal=0\nmodlatest_LinkCloaking=0\nmodlatest_SortReverse=0\nmodlatest_CustFmtStr=${eventDate}[!a: - ${endDate(%I:%M%p)}]\\n${title}\nmodlatest_RSS=0\nmodlatest_contentplugins=0\n\n',1),(35,'ITP Connect','option=com_itpconnect',0,0,'option=com_itpconnect','ITP Connect','com_itpconnect',0,'components/com_itpconnect/assets/images/menu_itpconnect.gif',0,'facebookOn=1\nfacebookAppId=234462196573276\nfacebookSecret=7681b09105aab6aca28077a77e3b31eb\nfbDynamicLocale=1\nfbLocale=en_US\nfbDisplayAjaxLoader=0\nfbSendConfirmationMail=0\n\n',1),(36,'Control Panel','',0,35,'option=com_itpconnect&controller=cpanel','Control Panel','com_itpconnect',0,'components/com_itpconnect/assets/images/menu_icon_cpanel.gif',0,'',1),(37,'Settings','',0,35,'option=com_itpconnect&controller=settings','Settings','com_itpconnect',1,'components/com_itpconnect/assets/images/menu_icon_settings.gif',0,'',1),(38,'Users','',0,35,'option=com_itpconnect&controller=users','Users','com_itpconnect',2,'components/com_itpconnect/assets/images/menu_icon_users.gif',0,'',1);
+/*!40000 ALTER TABLE `jos_components` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_contact_details`
+--
+
+DROP TABLE IF EXISTS `jos_contact_details`;
+CREATE TABLE `jos_contact_details` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL default '',
+  `alias` varchar(255) NOT NULL default '',
+  `con_position` varchar(255) default NULL,
+  `address` text,
+  `suburb` varchar(100) default NULL,
+  `state` varchar(100) default NULL,
+  `country` varchar(100) default NULL,
+  `postcode` varchar(100) default NULL,
+  `telephone` varchar(255) default NULL,
+  `fax` varchar(255) default NULL,
+  `misc` mediumtext,
+  `image` varchar(255) default NULL,
+  `imagepos` varchar(20) default NULL,
+  `email_to` varchar(255) default NULL,
+  `default_con` tinyint(1) unsigned NOT NULL default '0',
+  `published` tinyint(1) unsigned NOT NULL default '0',
+  `checked_out` int(11) unsigned NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `ordering` int(11) NOT NULL default '0',
+  `params` text NOT NULL,
+  `user_id` int(11) NOT NULL default '0',
+  `catid` int(11) NOT NULL default '0',
+  `access` tinyint(3) unsigned NOT NULL default '0',
+  `mobile` varchar(255) NOT NULL default '',
+  `webpage` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`id`),
+  KEY `catid` (`catid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_contact_details`
+--
+
+LOCK TABLES `jos_contact_details` WRITE;
+/*!40000 ALTER TABLE `jos_contact_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_contact_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_content`
+--
+
+DROP TABLE IF EXISTS `jos_content`;
+CREATE TABLE `jos_content` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `title` varchar(255) NOT NULL default '',
+  `alias` varchar(255) NOT NULL default '',
+  `title_alias` varchar(255) NOT NULL default '',
+  `introtext` mediumtext NOT NULL,
+  `fulltext` mediumtext NOT NULL,
+  `state` tinyint(3) NOT NULL default '0',
+  `sectionid` int(11) unsigned NOT NULL default '0',
+  `mask` int(11) unsigned NOT NULL default '0',
+  `catid` int(11) unsigned NOT NULL default '0',
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
+  `created_by` int(11) unsigned NOT NULL default '0',
+  `created_by_alias` varchar(255) NOT NULL default '',
+  `modified` datetime NOT NULL default '0000-00-00 00:00:00',
+  `modified_by` int(11) unsigned NOT NULL default '0',
+  `checked_out` int(11) unsigned NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `publish_up` datetime NOT NULL default '0000-00-00 00:00:00',
+  `publish_down` datetime NOT NULL default '0000-00-00 00:00:00',
+  `images` text NOT NULL,
+  `urls` text NOT NULL,
+  `attribs` text NOT NULL,
+  `version` int(11) unsigned NOT NULL default '1',
+  `parentid` int(11) unsigned NOT NULL default '0',
+  `ordering` int(11) NOT NULL default '0',
+  `metakey` text NOT NULL,
+  `metadesc` text NOT NULL,
+  `access` int(11) unsigned NOT NULL default '0',
+  `hits` int(11) unsigned NOT NULL default '0',
+  `metadata` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `idx_section` (`sectionid`),
+  KEY `idx_access` (`access`),
+  KEY `idx_checkout` (`checked_out`),
+  KEY `idx_state` (`state`),
+  KEY `idx_catid` (`catid`),
+  KEY `idx_createdby` (`created_by`)
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_content`
+--
+
+LOCK TABLES `jos_content` WRITE;
+/*!40000 ALTER TABLE `jos_content` DISABLE KEYS */;
+INSERT INTO `jos_content` VALUES (1,'hello!','hello','','<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus  varius elit vitae tellus molestie hendrerit. Vestibulum rutrum mauris ut  lacus pretium ullamcorper. Vestibulum eget libero sed felis vulputate  dictum quis ut velit. Nam posuere luctus nisi, vulputate auctor neque  commodo sit amet. Donec faucibus cursus ipsum vitae sollicitudin. Ut  molestie ante nec lorem tempus at porttitor erat ornare. Aliquam erat  volutpat.</p>\r\n','\r\n<p>Aliquam erat volutpat. Sed tincidunt vulputate commodo. Integer  ornare neque vel massa elementum ut sollicitudin dolor lobortis. Donec  lobortis gravida nunc, eu pretium odio sagittis vel. Sed placerat  porttitor eros ut commodo. Class aptent taciti sociosqu ad litora  torquent per conubia nostra, per inceptos himenaeos. Curabitur semper  venenatis facilisis. Cum sociis natoque penatibus et magnis dis  parturient montes, nascetur ridiculus mus. Phasellus ac pellentesque  quam. Sed at mi diam, non hendrerit lacus. Vestibulum velit magna,  dapibus non pellentesque vel, sagittis a diam.</p>\r\n<p>Aliquam erat volutpat. Etiam enim lorem, tincidunt sit amet ultrices  consectetur, varius ut tortor. Phasellus urna justo, iaculis eget  sodales non, porttitor quis libero. Mauris arcu arcu, tincidunt ac  hendrerit sit amet, sollicitudin quis odio. Nullam sed lacus leo. Donec  at convallis felis. Cras eros mi, pharetra id tempus sit amet, convallis  eu sapien. Aliquam erat volutpat. Phasellus commodo tristique viverra.  Integer nisi ligula, tincidunt condimentum varius a, convallis sed  metus. Nullam justo massa, pellentesque gravida egestas ac, tincidunt  vel ipsum. Sed rhoncus felis sed velit tempus quis porta nunc accumsan.  Vivamus tincidunt mattis felis nec pharetra. Nunc rutrum orci in massa  convallis sagittis. Aliquam eget sollicitudin mauris. Nullam gravida  semper tristique. Integer vestibulum orci in lorem lacinia hendrerit. In  ut hendrerit dolor. Vivamus vel tellus lorem, porta tristique quam. Ut  sagittis lacus varius turpis feugiat et euismod sapien convallis.</p>\r\n<p> </p>',1,1,0,2,'2011-07-10 06:15:16',62,'','2011-07-13 06:20:48',62,0,'0000-00-00 00:00:00','2011-07-10 06:15:16','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=1\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',9,0,3,'','',0,26,'robots=\nauthor='),(2,'goodbye','goodbye','','<p>{gallery}banners{/gallery}</p>','',1,2,0,3,'2011-07-10 06:32:53',62,'','0000-00-00 00:00:00',0,0,'0000-00-00 00:00:00','2011-07-10 06:32:53','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',1,0,5,'','',0,4,'robots=\nauthor='),(3,'vid','vid','','<p>{flv}hiccup{/flv}</p>\r\n','\r\n<p>{flv}hiccup{/flv}</p>',1,3,0,4,'2011-07-11 04:53:38',62,'','2011-07-13 06:19:15',62,0,'0000-00-00 00:00:00','2011-07-11 04:53:38','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=0\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=0\nshow_print_icon=0\nshow_email_icon=0\nlanguage=\nkeyref=\nreadmore=',6,0,1,'','',0,28,'robots=\nauthor='),(4,'Welcome to the Cora Fox Fan Club','welcome-to-the-cora-fox-fan-club','','<p><strong>UPDATE:</strong></p>\r\n<p>Wow, it\'s been a while since I\'ve done so!  Bear with me and be sure to visit the Media and Blog links in case you missed something.  I KNOW you want to know everything!</p>\r\n<p>\r\n<hr />\r\n</p>\r\n<p>Hi there! My name is Cora Fox, and I\'m somewhat new here. This site has been set up for me by my people to give you, my fan base, all the latest news about me! You\'ll find photos of me, maybe even some wallpapers (if you\'re so inclined), a blog to keep you up to date, and maybe even videos!</p>\r\n<p>Any rate, I hope you enjoy my site, and thanks for being a fan!</p>','',1,0,0,0,'2011-07-12 16:38:18',63,'','2011-08-21 18:26:53',62,0,'0000-00-00 00:00:00','2011-07-12 16:38:18','0000-00-00 00:00:00','','','show_title=1\nlink_titles=0\nshow_intro=\nshow_section=0\nlink_section=0\nshow_category=0\nlink_category=0\nshow_vote=\nshow_author=0\nshow_create_date=0\nshow_modify_date=0\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',4,0,1,'','',0,8,'robots=\nauthor='),(5,'PHOTO POST TEMPLATE','photo-post-template','','<p>{gallery count=1 links=0 buttons=0 overlay=1 counter=0 lightbox=none  crop=1 width=194 height=194 alignment=left maxcount=3}&lt;insert directory name here&gt;{/gallery}</p>\r\n','\r\n<p>{gallery count=1 width=500 height=400}&lt;insert directory name here&gt;{/gallery}</p>',0,2,0,3,'2011-07-12 17:03:26',62,'','2011-07-12 17:05:30',62,0,'0000-00-00 00:00:00','2011-07-12 17:03:26','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',2,0,4,'','',0,0,'robots=\nauthor='),(6,'Some Starter Pics','some-starter-pics','','<p>{gallery count=1 links=0 buttons=0 overlay=1 counter=0 lightbox=none  crop=1 width=194 height=194 alignment=left maxcount=3}banners{/gallery}</p>\r\n','\r\n<p>{gallery count=1 width=500 height=400}banners{/gallery}</p>',1,2,0,3,'2011-07-12 23:59:26',62,'','2011-07-14 07:19:49',62,0,'0000-00-00 00:00:00','2011-07-12 17:03:26','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',4,0,2,'','',0,9,'robots=\nauthor='),(7,'hoobiehoobie','some-starter-pics','','<p>{gallery count=1 links=0 buttons=0 overlay=1 counter=0 lightbox=none  crop=1 width=194 height=194 alignment=left maxcount=3}banners{/gallery}</p>\r\n','\r\n<p>{gallery count=1 width=500 height=400}banners{/gallery}</p>',1,2,0,3,'2011-07-12 17:03:26',62,'','2011-07-13 06:30:53',62,0,'0000-00-00 00:00:00','2011-07-12 17:03:26','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',1,0,3,'','',0,8,'robots=\nauthor='),(8,'About Cora','about-cora','','<p>So, you want to know something about me, do you?</p>\r\n<p>Well, you are perfectly normal!</p>\r\n<p>I mean, who WOULDN\'T want to know about me? I\'m completely awesome! I\'m cute as a button, I\'ve got some of the best parents around, I\'ve been told that I\'m \"very alert for my age\" (whatever that means).... I\'ve got it all!</p>\r\n<p>All self-promotion aside, I was born at the beginning of the summer in 2011 in the heart of Silicon Valley. My mommy does something with books and my daddy does something with computers, not that I will have any idea what computers or books are for quite some time. Of course, I\'m a girl, as only the very cutest of babies are girls.</p>\r\n<p>So far, my major accomplishment is to make two completely independent, successful, and active adults (my parents, of course) bend to my every whim, no matter what time of day or night. If I want food, all I have to do is ask politely and they bring it to me. Granted, at this point in my life, I don\'t yet know how to use my words, so I have to use high-pitched shrieks at the top of my lungs, but you can\'t deny the effectiveness!</p>\r\n<p>Aside from that, I spend most of my time eating and napping, but I have a particular hobby of filling up diapers. You see, I get bored sometimes, and my parents (particularly my Dad) makes such a big deal about how much is in them, I can\'t help but just string him along (the poor sucker!).</p>\r\n<p>Well, that\'s about all I have time for now. For more about my life, just keep watching as I post updates here!</p>\r\n<p>Love y\'all!</p>\r\n<p>Cora Fox</p>','',1,4,0,5,'2011-07-14 06:10:33',62,'','0000-00-00 00:00:00',0,0,'0000-00-00 00:00:00','2011-07-14 06:10:33','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',1,0,2,'','',0,54,'robots=\nauthor='),(9,'Copyright','copyright','','<p>All content on this site is the property of Josh Wickham and Shanin Fox unless otherwise noted with the item.  As such, you must reserve the permission from one of these people in order to use any of the pictures, videos, text, or other intellectual property.  You can request permission by emailing josh at i-josh dot com.</p>\r\n<p>That said, a good deal of open-source and free-to-use content has gone into the creation of the site, mostly in the form of Joomla! extensions and templates.  Credit is given to the following people or organizations and which modules, components, templates, etc. they are responsible for</p>','',1,4,0,5,'2011-07-14 06:23:25',62,'','2011-09-26 02:35:47',62,0,'0000-00-00 00:00:00','2011-07-14 06:23:25','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=\nshow_section=0\nlink_section=0\nshow_category=0\nlink_category=0\nshow_vote=\nshow_author=0\nshow_create_date=0\nshow_modify_date=0\nshow_pdf_icon=0\nshow_print_icon=0\nshow_email_icon=0\nlanguage=\nkeyref=\nreadmore=',2,0,1,'','',0,41,'robots=\nauthor='),(10,'Cora goes to Work!','cora-goes-to-work','','<p>So, because what we had going on today got cancelled, Shanin and I decided to take Cora up to San Francisco to make a surprise visit at Zynga.  Boy were people surprised!</p>\r\n','\r\n<p>To start out with, we got on the road well after rush hour, but quickly discovered that we had forgotten to get gas.  So, we pulled over.  Through all this, Cora was as sweet as can be.</p>\r\n<p>Five minutes later, she was screaming her head off. She wanted attention/milk/diaper changed/something and she wanted it NOW!  So, we pulled over into a nice residential neighborhood just off 280, stopped on one of the nice, quiet streets, and completely shattered the silence while I changed Cora\'s diaper. Because she was already upset, Cora let loose with a couple of her nuclear-powered screams which, frankly, I\'m surprised didn\'t send people to their phones dialing 911.  Also, as I was changing her on the back seat, I had her laying on a nylon changing pad (so as not to mess up the upholstery).  The only problem is that the seat is angled backwards, so she kept sliding into the back of the seat, cocking her head off at very strange angles.  While she\'s screaming and kicking and I\'m trying to clean and control her, of course.  Yay.</p>\r\n<p>We got back on the road, now with my wife in the back seat and Cora horrifically traumatized (if we are to believe the screams).  We finally got her to be quiet by having Shanin rock the car seat somewhat while I (in the front seat, driving) reached back into the rear-facing car seat to offer my pinkie as a binkie.  Very uncomfortable for me, no fun for Shanin, but Cora fell right asleep, so she was obviously LOVING it.</p>\r\n<p>And, she didn\'t wake up till we were getting ready to leave Zynga.  When Shanin and I walked in, we saw a few people here and there whom I work with and they did the \"aww she\'s so cute\" thing.  However, we were completely accosted and swamped by a mob just outside IT.  Probably a dozen people ooo-ing and awwww-ing (rightfully so, it must be said) and trying to talk to Shanin and me all at the same time.  We eventually let them get lunch then went into the Cafe suite where we were pulled into several different conversations by my co-workers (most of whom wanted to know when I was coming back).  Admittedly, it was very nice to talk to them; I\'ve missed them despite having Cora around to distract me.</p>\r\n<p>Throughout the whole time in the Cafe suite, Cora was completely unconscious and slung over my arm like a bag of chips.  Of COURSE she\'s going to behave herself when she\'s out in public; that\'s part of her M.O.: act perfect for people when they\'re around, torture her parents when they\'re not!</p>\r\n<p><img src=\"user_media/sigplus/zynga-20110713/IMG_5305.JPG\" border=\"0\" alt=\"Deniz holding Cora\" width=\"126\" height=\"95\" style=\"float: left; padding: 2px; border: 1px solid #888; margin-right: 8px;\" />After Cafe, we went to City, where more and more former Cafe people are.  More ooo-ing and awww-ing and the first <span style=\"text-decoration: line-through;\">victim</span> volunteer to hold her did: Deniz.  He seemed kinda nervous and gave her back promptly, but not before we got a couple of quick snaps of him with the kid (buuuaaahahhahahaha!) One of his main concerns is that his squeeze will see pictures of him and get some ideas about having kids... so there\'s NO WAY we\'re going to tell Jenny about this picture, especially when it\'s up on Facebook soon, right?</p>\r\n<p style=\"clear: both;\"><img src=\"user_media/sigplus/zynga-20110713/IMG_5307.JPG\" border=\"0\" alt=\"Ginger holding Cora\" width=\"126\" height=\"95\" style=\"float: right; padding: 2px; border: 1px solid #888; margin-left: 8px;\" />When leaving, we stopped at the bathroom, and that\'s where the sleeping ended.  Cora needed more attention.  So I took her into the bathroom to change her, brought her back outside and Shanin fed her.  Then we ended up changing her again!  (She just goes through the diapers!) After a couple minutes, Ginger walked by dressed as an ice queen, all light-blue dress and awesome makeup.  She wanted to hold Cora too, and we obliged for the small price of a couple of photos.  Cora was completely FASCINATED with Ginger; may have been the inch-long bling eyelashes, the makeup, the earrings or something else; she just could NOT take her eyes off Ginger!</p>\r\n<p>The ride home went about how the ride up went: Cora was quiet until the middle, then she made lots of noise.  However, this time, we stopped at Ikea to get another table, so Shanin was able to feed Cora to calm her down again.  And that was the Trip to Zynga!</p>\r\n<p>Pics can be seen <a href=\"photos/3-uncategorized/11-cora-goes-to-work-photos\">here</a></p>',1,1,0,2,'2011-07-14 07:26:20',62,'','2011-08-21 22:14:13',62,0,'0000-00-00 00:00:00','2011-07-14 07:26:20','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',5,0,2,'','',0,14,'robots=\nauthor='),(11,'Cora goes to Work!','cora-goes-to-work-photos','','<p>{gallery count=1 links=0 buttons=0 overlay=1 counter=0 lightbox=none  crop=1 width=194 height=194 alignment=left maxcount=3}zynga-20110713{/gallery}</p>\r\n','\r\n<p>{gallery count=1 width=500 height=400}zynga-20110713{/gallery}</p>',1,2,0,3,'2011-07-12 17:03:26',62,'','2011-07-14 07:57:28',62,0,'0000-00-00 00:00:00','2011-07-12 17:03:26','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=0\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',2,0,1,'','',0,42,'robots=\nauthor='),(12,'My First Bath (Shower)!','my-first-bath-shower','','<p>O.</p>\r\n<p>M.</p>\r\n<p>G.</p>\r\n<p>I had my first bath, and it was AMAZING!</p>\r\n<p>\r\n','\r\n</p>\r\n<p>My dad totally thought I would flip out if I was all wet for the first time, but I completely held it together!  Mommy came into the shower and held me (which, I\'ll admit, helped) while Daddy soaped me up with some no tears shampoo.  But the water was soooo warm and being clean was soooo nice, I just LOVED it!</p>\r\n<p>I guess it\'s a good thing I loved it too, as my folks tell me that I\'m going to be expected to take showers pretty much every day of my life at one point...</p>\r\n<p>Growing up can be hard, but sometimes you get something really nice like this that makes it all worth it!</p>',1,1,0,2,'2011-07-19 00:00:00',63,'','0000-00-00 00:00:00',0,0,'0000-00-00 00:00:00','2011-07-21 07:47:07','0000-00-00 00:00:00','','','show_title=\nlink_titles=\nshow_intro=1\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_vote=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nlanguage=\nkeyref=\nreadmore=',1,0,1,'','',0,39,'robots=\nauthor=');
+/*!40000 ALTER TABLE `jos_content` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_content_frontpage`
+--
+
+DROP TABLE IF EXISTS `jos_content_frontpage`;
+CREATE TABLE `jos_content_frontpage` (
+  `content_id` int(11) NOT NULL default '0',
+  `ordering` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`content_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_content_frontpage`
+--
+
+LOCK TABLES `jos_content_frontpage` WRITE;
+/*!40000 ALTER TABLE `jos_content_frontpage` DISABLE KEYS */;
+INSERT INTO `jos_content_frontpage` VALUES (4,1);
+/*!40000 ALTER TABLE `jos_content_frontpage` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_content_rating`
+--
+
+DROP TABLE IF EXISTS `jos_content_rating`;
+CREATE TABLE `jos_content_rating` (
+  `content_id` int(11) NOT NULL default '0',
+  `rating_sum` int(11) unsigned NOT NULL default '0',
+  `rating_count` int(11) unsigned NOT NULL default '0',
+  `lastip` varchar(50) NOT NULL default '',
+  PRIMARY KEY  (`content_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_content_rating`
+--
+
+LOCK TABLES `jos_content_rating` WRITE;
+/*!40000 ALTER TABLE `jos_content_rating` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_content_rating` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_core_acl_aro`
+--
+
+DROP TABLE IF EXISTS `jos_core_acl_aro`;
+CREATE TABLE `jos_core_acl_aro` (
+  `id` int(11) NOT NULL auto_increment,
+  `section_value` varchar(240) NOT NULL default '0',
+  `value` varchar(240) NOT NULL default '',
+  `order_value` int(11) NOT NULL default '0',
+  `name` varchar(255) NOT NULL default '',
+  `hidden` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `jos_section_value_value_aro` (`section_value`(100),`value`(100)),
+  KEY `jos_gacl_hidden_aro` (`hidden`)
+) ENGINE=MyISAM AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_core_acl_aro`
+--
+
+LOCK TABLES `jos_core_acl_aro` WRITE;
+/*!40000 ALTER TABLE `jos_core_acl_aro` DISABLE KEYS */;
+INSERT INTO `jos_core_acl_aro` VALUES (10,'users','62',0,'Josh Wickham',0),(11,'users','63',0,'Cora Fox',0),(12,'users','64',0,'Shanin Fox',0),(13,'users','65',0,'Josh Wickham',0);
+/*!40000 ALTER TABLE `jos_core_acl_aro` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_core_acl_aro_groups`
+--
+
+DROP TABLE IF EXISTS `jos_core_acl_aro_groups`;
+CREATE TABLE `jos_core_acl_aro_groups` (
+  `id` int(11) NOT NULL auto_increment,
+  `parent_id` int(11) NOT NULL default '0',
+  `name` varchar(255) NOT NULL default '',
+  `lft` int(11) NOT NULL default '0',
+  `rgt` int(11) NOT NULL default '0',
+  `value` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`id`),
+  KEY `jos_gacl_parent_id_aro_groups` (`parent_id`),
+  KEY `jos_gacl_lft_rgt_aro_groups` (`lft`,`rgt`)
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_core_acl_aro_groups`
+--
+
+LOCK TABLES `jos_core_acl_aro_groups` WRITE;
+/*!40000 ALTER TABLE `jos_core_acl_aro_groups` DISABLE KEYS */;
+INSERT INTO `jos_core_acl_aro_groups` VALUES (17,0,'ROOT',1,22,'ROOT'),(28,17,'USERS',2,21,'USERS'),(29,28,'Public Frontend',3,12,'Public Frontend'),(18,29,'Registered',4,11,'Registered'),(19,18,'Author',5,10,'Author'),(20,19,'Editor',6,9,'Editor'),(21,20,'Publisher',7,8,'Publisher'),(30,28,'Public Backend',13,20,'Public Backend'),(23,30,'Manager',14,19,'Manager'),(24,23,'Administrator',15,18,'Administrator'),(25,24,'Super Administrator',16,17,'Super Administrator');
+/*!40000 ALTER TABLE `jos_core_acl_aro_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_core_acl_aro_map`
+--
+
+DROP TABLE IF EXISTS `jos_core_acl_aro_map`;
+CREATE TABLE `jos_core_acl_aro_map` (
+  `acl_id` int(11) NOT NULL default '0',
+  `section_value` varchar(230) NOT NULL default '0',
+  `value` varchar(100) NOT NULL,
+  PRIMARY KEY  (`acl_id`,`section_value`,`value`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_core_acl_aro_map`
+--
+
+LOCK TABLES `jos_core_acl_aro_map` WRITE;
+/*!40000 ALTER TABLE `jos_core_acl_aro_map` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_core_acl_aro_map` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_core_acl_aro_sections`
+--
+
+DROP TABLE IF EXISTS `jos_core_acl_aro_sections`;
+CREATE TABLE `jos_core_acl_aro_sections` (
+  `id` int(11) NOT NULL auto_increment,
+  `value` varchar(230) NOT NULL default '',
+  `order_value` int(11) NOT NULL default '0',
+  `name` varchar(230) NOT NULL default '',
+  `hidden` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `jos_gacl_value_aro_sections` (`value`),
+  KEY `jos_gacl_hidden_aro_sections` (`hidden`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_core_acl_aro_sections`
+--
+
+LOCK TABLES `jos_core_acl_aro_sections` WRITE;
+/*!40000 ALTER TABLE `jos_core_acl_aro_sections` DISABLE KEYS */;
+INSERT INTO `jos_core_acl_aro_sections` VALUES (10,'users',1,'Users',0);
+/*!40000 ALTER TABLE `jos_core_acl_aro_sections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_core_acl_groups_aro_map`
+--
+
+DROP TABLE IF EXISTS `jos_core_acl_groups_aro_map`;
+CREATE TABLE `jos_core_acl_groups_aro_map` (
+  `group_id` int(11) NOT NULL default '0',
+  `section_value` varchar(240) NOT NULL default '',
+  `aro_id` int(11) NOT NULL default '0',
+  UNIQUE KEY `group_id_aro_id_groups_aro_map` (`group_id`,`section_value`,`aro_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_core_acl_groups_aro_map`
+--
+
+LOCK TABLES `jos_core_acl_groups_aro_map` WRITE;
+/*!40000 ALTER TABLE `jos_core_acl_groups_aro_map` DISABLE KEYS */;
+INSERT INTO `jos_core_acl_groups_aro_map` VALUES (18,'',13),(24,'',11),(24,'',12),(25,'',10);
+/*!40000 ALTER TABLE `jos_core_acl_groups_aro_map` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_core_log_items`
+--
+
+DROP TABLE IF EXISTS `jos_core_log_items`;
+CREATE TABLE `jos_core_log_items` (
+  `time_stamp` date NOT NULL default '0000-00-00',
+  `item_table` varchar(50) NOT NULL default '',
+  `item_id` int(11) unsigned NOT NULL default '0',
+  `hits` int(11) unsigned NOT NULL default '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_core_log_items`
+--
+
+LOCK TABLES `jos_core_log_items` WRITE;
+/*!40000 ALTER TABLE `jos_core_log_items` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_core_log_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_core_log_searches`
+--
+
+DROP TABLE IF EXISTS `jos_core_log_searches`;
+CREATE TABLE `jos_core_log_searches` (
+  `search_term` varchar(128) NOT NULL default '',
+  `hits` int(11) unsigned NOT NULL default '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_core_log_searches`
+--
+
+LOCK TABLES `jos_core_log_searches` WRITE;
+/*!40000 ALTER TABLE `jos_core_log_searches` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_core_log_searches` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_groups`
+--
+
+DROP TABLE IF EXISTS `jos_groups`;
+CREATE TABLE `jos_groups` (
+  `id` tinyint(3) unsigned NOT NULL default '0',
+  `name` varchar(50) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_groups`
+--
+
+LOCK TABLES `jos_groups` WRITE;
+/*!40000 ALTER TABLE `jos_groups` DISABLE KEYS */;
+INSERT INTO `jos_groups` VALUES (0,'Public'),(1,'Registered'),(2,'Special');
+/*!40000 ALTER TABLE `jos_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_itpc_sessions`
+--
+
+DROP TABLE IF EXISTS `jos_itpc_sessions`;
+CREATE TABLE `jos_itpc_sessions` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `fbuser_id` varchar(50) NOT NULL default '0',
+  `twuser_id` varchar(50) NOT NULL default '0',
+  `logout` tinyint(1) unsigned NOT NULL default '0',
+  `date` timestamp NOT NULL default CURRENT_TIMESTAMP,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_itpc_sessions`
+--
+
+LOCK TABLES `jos_itpc_sessions` WRITE;
+/*!40000 ALTER TABLE `jos_itpc_sessions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_itpc_sessions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_itpc_users`
+--
+
+DROP TABLE IF EXISTS `jos_itpc_users`;
+CREATE TABLE `jos_itpc_users` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `users_id` int(11) unsigned NOT NULL,
+  `fbuser_id` varchar(50) NOT NULL default '0',
+  `twuser_id` varchar(50) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_itpc_users`
+--
+
+LOCK TABLES `jos_itpc_users` WRITE;
+/*!40000 ALTER TABLE `jos_itpc_users` DISABLE KEYS */;
+INSERT INTO `jos_itpc_users` VALUES (1,65,'787589669','0');
+/*!40000 ALTER TABLE `jos_itpc_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jev_defaults`
+--
+
+DROP TABLE IF EXISTS `jos_jev_defaults`;
+CREATE TABLE `jos_jev_defaults` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `title` varchar(100) NOT NULL default '',
+  `name` varchar(50) NOT NULL default '',
+  `subject` text NOT NULL,
+  `value` text NOT NULL,
+  `state` tinyint(3) NOT NULL default '1',
+  `params` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `name` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jev_defaults`
+--
+
+LOCK TABLES `jos_jev_defaults` WRITE;
+/*!40000 ALTER TABLE `jos_jev_defaults` DISABLE KEYS */;
+INSERT INTO `jos_jev_defaults` VALUES (1,'Event Detail Page','icalevent.detail_body','','',0,''),(2,'List Row Detail','icalevent.list_row','','<p>{{Repeat Summary:REPEATSUMMARY}}{{Title Link:TITLE_LINK}}{{Creator Label:CREATOR_LABEL}}<em> {{Creator:CREATOR}}</em> ::  {{Category:CATEGORY}}</p>',0,'');
+/*!40000 ALTER TABLE `jos_jev_defaults` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jev_users`
+--
+
+DROP TABLE IF EXISTS `jos_jev_users`;
+CREATE TABLE `jos_jev_users` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `user_id` int(11) NOT NULL default '0',
+  `published` tinyint(2) NOT NULL default '0',
+  `canuploadimages` tinyint(2) NOT NULL default '0',
+  `canuploadmovies` tinyint(2) NOT NULL default '0',
+  `cancreate` tinyint(2) NOT NULL default '0',
+  `canedit` tinyint(2) NOT NULL default '0',
+  `canpublishown` tinyint(2) NOT NULL default '0',
+  `candeleteown` tinyint(2) NOT NULL default '0',
+  `canpublishall` tinyint(2) NOT NULL default '0',
+  `candeleteall` tinyint(2) NOT NULL default '0',
+  `cancreateown` tinyint(2) NOT NULL default '0',
+  `cancreateglobal` tinyint(2) NOT NULL default '0',
+  `eventslimit` int(11) NOT NULL default '0',
+  `extraslimit` int(11) NOT NULL default '0',
+  `categories` varchar(255) NOT NULL default '',
+  `calendars` varchar(255) NOT NULL default '',
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`id`),
+  KEY `user` (`user_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jev_users`
+--
+
+LOCK TABLES `jos_jev_users` WRITE;
+/*!40000 ALTER TABLE `jos_jev_users` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_jev_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jevents_categories`
+--
+
+DROP TABLE IF EXISTS `jos_jevents_categories`;
+CREATE TABLE `jos_jevents_categories` (
+  `id` int(12) NOT NULL default '0',
+  `color` varchar(8) NOT NULL default '',
+  `admin` int(12) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jevents_categories`
+--
+
+LOCK TABLES `jos_jevents_categories` WRITE;
+/*!40000 ALTER TABLE `jos_jevents_categories` DISABLE KEYS */;
+INSERT INTO `jos_jevents_categories` VALUES (1,'#CCCCFF',0);
+/*!40000 ALTER TABLE `jos_jevents_categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jevents_exception`
+--
+
+DROP TABLE IF EXISTS `jos_jevents_exception`;
+CREATE TABLE `jos_jevents_exception` (
+  `ex_id` int(12) NOT NULL auto_increment,
+  `rp_id` int(12) NOT NULL default '0',
+  `eventid` int(12) NOT NULL default '1',
+  `eventdetail_id` int(12) NOT NULL default '0',
+  `exception_type` int(2) NOT NULL default '0',
+  `startrepeat` datetime NOT NULL default '0000-00-00 00:00:00',
+  `oldstartrepeat` datetime NOT NULL default '0000-00-00 00:00:00',
+  `tempfield` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`ex_id`),
+  KEY `eventid` (`eventid`),
+  KEY `rp_id` (`rp_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jevents_exception`
+--
+
+LOCK TABLES `jos_jevents_exception` WRITE;
+/*!40000 ALTER TABLE `jos_jevents_exception` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_jevents_exception` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jevents_icsfile`
+--
+
+DROP TABLE IF EXISTS `jos_jevents_icsfile`;
+CREATE TABLE `jos_jevents_icsfile` (
+  `ics_id` int(12) NOT NULL auto_increment,
+  `srcURL` varchar(255) NOT NULL default '',
+  `label` varchar(30) NOT NULL default '',
+  `filename` varchar(120) NOT NULL default '',
+  `icaltype` tinyint(3) NOT NULL default '0',
+  `isdefault` tinyint(3) NOT NULL default '0',
+  `ignoreembedcat` tinyint(3) NOT NULL default '0',
+  `state` tinyint(3) NOT NULL default '1',
+  `access` int(11) unsigned NOT NULL default '0',
+  `catid` int(11) NOT NULL default '1',
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
+  `created_by` int(11) unsigned NOT NULL default '0',
+  `created_by_alias` varchar(100) NOT NULL default '',
+  `modified_by` int(11) unsigned NOT NULL default '0',
+  `refreshed` datetime NOT NULL default '0000-00-00 00:00:00',
+  `autorefresh` tinyint(3) NOT NULL default '0',
+  PRIMARY KEY  (`ics_id`),
+  UNIQUE KEY `label` (`label`),
+  KEY `stateidx` (`state`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jevents_icsfile`
+--
+
+LOCK TABLES `jos_jevents_icsfile` WRITE;
+/*!40000 ALTER TABLE `jos_jevents_icsfile` DISABLE KEYS */;
+INSERT INTO `jos_jevents_icsfile` VALUES (1,'','Default','Initial ICS File',2,1,0,1,0,1,'0000-00-00 00:00:00',62,'',0,'0000-00-00 00:00:00',0);
+/*!40000 ALTER TABLE `jos_jevents_icsfile` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jevents_repbyday`
+--
+
+DROP TABLE IF EXISTS `jos_jevents_repbyday`;
+CREATE TABLE `jos_jevents_repbyday` (
+  `rptday` date NOT NULL default '0000-00-00',
+  `rp_id` int(12) NOT NULL default '0',
+  `catid` int(11) NOT NULL default '1',
+  KEY `rptday` (`rptday`),
+  KEY `daycat` (`rptday`,`catid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jevents_repbyday`
+--
+
+LOCK TABLES `jos_jevents_repbyday` WRITE;
+/*!40000 ALTER TABLE `jos_jevents_repbyday` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_jevents_repbyday` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jevents_repetition`
+--
+
+DROP TABLE IF EXISTS `jos_jevents_repetition`;
+CREATE TABLE `jos_jevents_repetition` (
+  `rp_id` int(12) NOT NULL auto_increment,
+  `eventid` int(12) NOT NULL default '1',
+  `eventdetail_id` int(12) NOT NULL default '0',
+  `duplicatecheck` varchar(32) NOT NULL default '',
+  `startrepeat` datetime NOT NULL default '0000-00-00 00:00:00',
+  `endrepeat` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`rp_id`),
+  UNIQUE KEY `duplicatecheck` (`duplicatecheck`),
+  KEY `eventid` (`eventid`),
+  KEY `eventstart` (`eventid`,`startrepeat`),
+  KEY `eventend` (`eventid`,`endrepeat`),
+  KEY `eventdetail` (`eventdetail_id`),
+  KEY `startrepeat` (`startrepeat`),
+  KEY `startend` (`startrepeat`,`endrepeat`),
+  KEY `endrepeat` (`endrepeat`)
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jevents_repetition`
+--
+
+LOCK TABLES `jos_jevents_repetition` WRITE;
+/*!40000 ALTER TABLE `jos_jevents_repetition` DISABLE KEYS */;
+INSERT INTO `jos_jevents_repetition` VALUES (9,4,4,'16c62319de1a7204943e183873eefb99','2011-07-16 13:00:00','2011-07-16 17:00:00'),(3,2,2,'fbb0485be089238c966455e89a981db7','2011-07-20 00:00:00','2011-07-20 23:59:59'),(4,3,3,'a4c06db5c67b38ebf1567c2314ca4fd9','2011-07-27 08:00:00','2011-07-27 17:00:00'),(5,3,3,'207c0d0d8b675a213325e61ebca738d0','2011-07-28 08:00:00','2011-07-28 17:00:00'),(6,3,3,'70f5b64b22ce90e6537cbd8368752eea','2011-07-29 08:00:00','2011-07-29 17:00:00'),(7,3,3,'54b6894d7081f99a262e8ec97b55c3a0','2011-07-30 08:00:00','2011-07-30 17:00:00'),(8,3,3,'b8938fe53ec33b3ba5cf6d0cabc2bb68','2011-07-31 08:00:00','2011-07-31 17:00:00'),(10,5,5,'0b0878c8faf69c2601d0bcdfbb2aba52','2011-07-30 13:00:00','2011-07-30 17:00:00'),(11,6,6,'32a8303ef3d72a7c357d6d60b6147ea8','2011-07-22 00:00:00','2011-07-22 23:59:59');
+/*!40000 ALTER TABLE `jos_jevents_repetition` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jevents_rrule`
+--
+
+DROP TABLE IF EXISTS `jos_jevents_rrule`;
+CREATE TABLE `jos_jevents_rrule` (
+  `rr_id` int(12) NOT NULL auto_increment,
+  `eventid` int(12) NOT NULL default '1',
+  `freq` varchar(30) NOT NULL default '',
+  `until` int(12) NOT NULL default '1',
+  `untilraw` varchar(30) NOT NULL default '',
+  `count` int(6) NOT NULL default '1',
+  `rinterval` int(6) NOT NULL default '1',
+  `bysecond` varchar(50) NOT NULL default '',
+  `byminute` varchar(50) NOT NULL default '',
+  `byhour` varchar(50) NOT NULL default '',
+  `byday` varchar(50) NOT NULL default '',
+  `bymonthday` varchar(50) NOT NULL default '',
+  `byyearday` varchar(50) NOT NULL default '',
+  `byweekno` varchar(50) NOT NULL default '',
+  `bymonth` varchar(50) NOT NULL default '',
+  `bysetpos` varchar(50) NOT NULL default '',
+  `wkst` varchar(50) NOT NULL default '',
+  PRIMARY KEY  (`rr_id`),
+  KEY `eventid` (`eventid`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jevents_rrule`
+--
+
+LOCK TABLES `jos_jevents_rrule` WRITE;
+/*!40000 ALTER TABLE `jos_jevents_rrule` DISABLE KEYS */;
+INSERT INTO `jos_jevents_rrule` VALUES (4,4,'none',0,'',1,1,'','','','SA','','','','','',''),(2,2,'none',0,'',1,1,'','','','+1WE,+2WE,+3WE,+4WE,+5WE','','','','','',''),(3,3,'DAILY',0,'',5,1,'','','','WE','','','','','',''),(5,5,'none',0,'',1,1,'','','','SA','','','','','',''),(6,6,'none',0,'',1,1,'','','','+1FR,+2FR,+3FR,+4FR,+5FR','','','','','','');
+/*!40000 ALTER TABLE `jos_jevents_rrule` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jevents_vevdetail`
+--
+
+DROP TABLE IF EXISTS `jos_jevents_vevdetail`;
+CREATE TABLE `jos_jevents_vevdetail` (
+  `evdet_id` int(12) NOT NULL auto_increment,
+  `rawdata` longtext NOT NULL,
+  `dtstart` int(11) NOT NULL default '0',
+  `dtstartraw` varchar(30) NOT NULL default '',
+  `duration` int(11) NOT NULL default '0',
+  `durationraw` varchar(30) NOT NULL default '',
+  `dtend` int(11) NOT NULL default '0',
+  `dtendraw` varchar(30) NOT NULL default '',
+  `dtstamp` varchar(30) NOT NULL default '',
+  `class` varchar(10) NOT NULL default '',
+  `categories` varchar(120) NOT NULL default '',
+  `color` varchar(20) NOT NULL default '',
+  `description` longtext NOT NULL,
+  `geolon` float NOT NULL default '0',
+  `geolat` float NOT NULL default '0',
+  `location` varchar(120) NOT NULL default '',
+  `priority` tinyint(3) unsigned NOT NULL default '0',
+  `status` varchar(20) NOT NULL default '',
+  `summary` longtext NOT NULL,
+  `contact` varchar(120) NOT NULL default '',
+  `organizer` varchar(120) NOT NULL default '',
+  `url` text NOT NULL,
+  `extra_info` varchar(240) NOT NULL default '',
+  `created` varchar(30) NOT NULL default '',
+  `sequence` int(11) NOT NULL default '1',
+  `state` tinyint(3) NOT NULL default '1',
+  `modified` datetime NOT NULL default '0000-00-00 00:00:00',
+  `multiday` tinyint(3) NOT NULL default '1',
+  `hits` int(11) NOT NULL default '0',
+  `noendtime` tinyint(3) NOT NULL default '0',
+  PRIMARY KEY  (`evdet_id`),
+  FULLTEXT KEY `searchIdx` (`summary`,`description`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jevents_vevdetail`
+--
+
+LOCK TABLES `jos_jevents_vevdetail` WRITE;
+/*!40000 ALTER TABLE `jos_jevents_vevdetail` DISABLE KEYS */;
+INSERT INTO `jos_jevents_vevdetail` VALUES (4,'',1310846400,'',0,'',1310860800,'','','','','','',0,0,'',0,'','Cora Baby Shower','','','','','',0,1,'2011-07-14 08:10:13',1,19,0),(2,'',1311145200,'',0,'',1311145200,'','','','','','<p>It\'s about time my parents get me air conditioning!  It\'s been soo hot sometimes, then it\'s cold.  I just don\'t know what to make of it!</p>',0,0,'',0,'','I GET AIR CONDITIONING!','','','','','',0,1,'2011-07-14 07:22:17',1,19,0),(3,'',1311778800,'',0,'',1311811200,'','','','','','<p>Because it can be noisy and, I guess, because we\'re getting A/C and we have to save something called the virernment, whatever that is, my parents are going to disrupt my life once again and have dual-pane windows installed.  It\'s going to take several days, during which people will be in and out of the house, making noise and dust and just generally upsetting things.</p>\r\n<p>I REALLY hope it\'s worth it!</p>',0,0,'',0,'','Dual-Pane Windows','','','','','',0,1,'2011-07-14 07:24:49',1,134,0),(5,'',1312056000,'',0,'',1312070400,'','','','','','',0,0,'',0,'','Cora Baby Shower, take 2','','','','','',0,1,'2011-07-14 08:10:39',1,18,0),(6,'',1311318000,'',0,'',1311318000,'','','','','','<p>Yay!  My uncle and aunt are back from Ethiopia, and they\'re coming up with my other uncle who lives in Long Beach!  I\'m excited!</p>',0,0,'',0,'','I meet my uncles and aunt!','','','','','',0,1,'2011-07-14 08:12:23',1,18,0);
+/*!40000 ALTER TABLE `jos_jevents_vevdetail` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_jevents_vevent`
+--
+
+DROP TABLE IF EXISTS `jos_jevents_vevent`;
+CREATE TABLE `jos_jevents_vevent` (
+  `ev_id` int(12) NOT NULL auto_increment,
+  `icsid` int(12) NOT NULL default '0',
+  `catid` int(11) NOT NULL default '1',
+  `uid` varchar(255) NOT NULL default '',
+  `refreshed` datetime NOT NULL default '0000-00-00 00:00:00',
+  `created` datetime NOT NULL default '0000-00-00 00:00:00',
+  `created_by` int(11) unsigned NOT NULL default '0',
+  `created_by_alias` varchar(100) NOT NULL default '',
+  `modified_by` int(11) unsigned NOT NULL default '0',
+  `rawdata` longtext NOT NULL,
+  `recurrence_id` varchar(30) NOT NULL default '',
+  `detail_id` int(12) NOT NULL default '0',
+  `state` tinyint(3) NOT NULL default '1',
+  `lockevent` tinyint(3) NOT NULL default '0',
+  `author_notified` tinyint(3) NOT NULL default '0',
+  `access` int(11) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`ev_id`),
+  UNIQUE KEY `uid` (`uid`),
+  KEY `icsid` (`icsid`),
+  KEY `stateidx` (`state`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_jevents_vevent`
+--
+
+LOCK TABLES `jos_jevents_vevent` WRITE;
+/*!40000 ALTER TABLE `jos_jevents_vevent` DISABLE KEYS */;
+INSERT INTO `jos_jevents_vevent` VALUES (4,1,1,'9800c93aee3da36a3b78e84672007512','0000-00-00 00:00:00','2011-07-14 08:10:13',62,'',62,'a:17:{s:3:\"UID\";s:32:\"9800c93aee3da36a3b78e84672007512\";s:11:\"X-EXTRAINFO\";s:0:\"\";s:8:\"LOCATION\";s:0:\"\";s:11:\"allDayEvent\";s:3:\"off\";s:7:\"CONTACT\";s:0:\"\";s:11:\"DESCRIPTION\";s:0:\"\";s:12:\"publish_down\";s:10:\"2011-07-16\";s:10:\"publish_up\";s:10:\"2011-07-16\";s:7:\"SUMMARY\";s:16:\"Cora Baby Shower\";s:11:\"X-CREATEDBY\";s:2:\"62\";s:7:\"DTSTART\";i:1310846400;s:5:\"DTEND\";i:1310860800;s:5:\"RRULE\";a:4:{s:4:\"FREQ\";s:4:\"none\";s:5:\"COUNT\";i:1;s:8:\"INTERVAL\";s:1:\"1\";s:5:\"BYDAY\";s:2:\"SA\";}s:8:\"MULTIDAY\";s:1:\"1\";s:9:\"NOENDTIME\";s:1:\"0\";s:7:\"X-COLOR\";s:0:\"\";s:9:\"LOCKEVENT\";s:1:\"0\";}','',4,1,0,0,0),(2,1,1,'06581673a87535ca77f878258501a5be','0000-00-00 00:00:00','2011-07-14 07:21:47',63,'',62,'a:17:{s:3:\"UID\";s:32:\"06581673a87535ca77f878258501a5be\";s:11:\"X-EXTRAINFO\";s:0:\"\";s:8:\"LOCATION\";s:0:\"\";s:11:\"allDayEvent\";s:2:\"on\";s:7:\"CONTACT\";s:0:\"\";s:11:\"DESCRIPTION\";s:145:\"<p>It\'s about time my parents get me air conditioning!  It\'s been soo hot sometimes, then it\'s cold.  I just don\'t know what to make of it!</p>\";s:12:\"publish_down\";s:10:\"2011-07-20\";s:10:\"publish_up\";s:10:\"2011-07-20\";s:7:\"SUMMARY\";s:23:\"I GET AIR CONDITIONING!\";s:11:\"X-CREATEDBY\";s:2:\"63\";s:7:\"DTSTART\";i:1311145200;s:5:\"DTEND\";i:1311145200;s:5:\"RRULE\";a:4:{s:4:\"FREQ\";s:4:\"none\";s:5:\"COUNT\";i:1;s:8:\"INTERVAL\";s:1:\"1\";s:5:\"BYDAY\";s:24:\"+1WE,+2WE,+3WE,+4WE,+5WE\";}s:8:\"MULTIDAY\";s:1:\"1\";s:9:\"NOENDTIME\";s:1:\"0\";s:7:\"X-COLOR\";s:0:\"\";s:9:\"LOCKEVENT\";s:1:\"0\";}','',2,1,0,0,0),(3,1,1,'ccd0822b4c1605a4b1836046465d1a07','0000-00-00 00:00:00','2011-07-14 07:24:49',63,'',62,'a:17:{s:3:\"UID\";s:32:\"ccd0822b4c1605a4b1836046465d1a07\";s:11:\"X-EXTRAINFO\";s:0:\"\";s:8:\"LOCATION\";s:0:\"\";s:11:\"allDayEvent\";s:3:\"off\";s:7:\"CONTACT\";s:0:\"\";s:11:\"DESCRIPTION\";s:414:\"<p>Because it can be noisy and, I guess, because we\'re getting A/C and we have to save something called the virernment, whatever that is, my parents are going to disrupt my life once again and have dual-pane windows installed.  It\'s going to take several days, during which people will be in and out of the house, making noise and dust and just generally upsetting things.</p>\r\n<p>I REALLY hope it\'s worth it!</p>\";s:12:\"publish_down\";s:10:\"2011-07-27\";s:10:\"publish_up\";s:10:\"2011-07-27\";s:7:\"SUMMARY\";s:17:\"Dual-Pane Windows\";s:11:\"X-CREATEDBY\";s:2:\"63\";s:7:\"DTSTART\";i:1311778800;s:5:\"DTEND\";i:1311811200;s:5:\"RRULE\";a:4:{s:4:\"FREQ\";s:5:\"DAILY\";s:5:\"COUNT\";i:5;s:8:\"INTERVAL\";s:1:\"1\";s:5:\"BYDAY\";s:2:\"WE\";}s:8:\"MULTIDAY\";s:1:\"1\";s:9:\"NOENDTIME\";s:1:\"0\";s:7:\"X-COLOR\";s:0:\"\";s:9:\"LOCKEVENT\";s:1:\"0\";}','',3,1,0,0,0),(5,1,1,'e20a2660e3f6fbf9fb6acfbfe912add7','0000-00-00 00:00:00','2011-07-14 08:10:39',62,'',62,'a:17:{s:3:\"UID\";s:32:\"e20a2660e3f6fbf9fb6acfbfe912add7\";s:11:\"X-EXTRAINFO\";s:0:\"\";s:8:\"LOCATION\";s:0:\"\";s:11:\"allDayEvent\";s:3:\"off\";s:7:\"CONTACT\";s:0:\"\";s:11:\"DESCRIPTION\";s:0:\"\";s:12:\"publish_down\";s:10:\"2011-07-30\";s:10:\"publish_up\";s:10:\"2011-07-30\";s:7:\"SUMMARY\";s:24:\"Cora Baby Shower, take 2\";s:11:\"X-CREATEDBY\";s:2:\"62\";s:7:\"DTSTART\";i:1312056000;s:5:\"DTEND\";i:1312070400;s:5:\"RRULE\";a:4:{s:4:\"FREQ\";s:4:\"none\";s:5:\"COUNT\";i:1;s:8:\"INTERVAL\";s:1:\"1\";s:5:\"BYDAY\";s:2:\"SA\";}s:8:\"MULTIDAY\";s:1:\"1\";s:9:\"NOENDTIME\";s:1:\"0\";s:7:\"X-COLOR\";s:0:\"\";s:9:\"LOCKEVENT\";s:1:\"0\";}','',5,1,0,0,0),(6,1,1,'9e8a7aa46e03c766a1001ba0d8263aa2','0000-00-00 00:00:00','2011-07-14 08:11:50',63,'',62,'a:17:{s:3:\"UID\";s:32:\"9e8a7aa46e03c766a1001ba0d8263aa2\";s:11:\"X-EXTRAINFO\";s:0:\"\";s:8:\"LOCATION\";s:0:\"\";s:11:\"allDayEvent\";s:2:\"on\";s:7:\"CONTACT\";s:0:\"\";s:11:\"DESCRIPTION\";s:137:\"<p>Yay!  My uncle and aunt are back from Ethiopia, and they\'re coming up with my other uncle who lives in Long Beach!  I\'m excited!</p>\";s:12:\"publish_down\";s:10:\"2011-07-22\";s:10:\"publish_up\";s:10:\"2011-07-22\";s:7:\"SUMMARY\";s:26:\"I meet my uncles and aunt!\";s:11:\"X-CREATEDBY\";s:2:\"63\";s:7:\"DTSTART\";i:1311318000;s:5:\"DTEND\";i:1311318000;s:5:\"RRULE\";a:4:{s:4:\"FREQ\";s:4:\"none\";s:5:\"COUNT\";i:1;s:8:\"INTERVAL\";s:1:\"1\";s:5:\"BYDAY\";s:24:\"+1FR,+2FR,+3FR,+4FR,+5FR\";}s:8:\"MULTIDAY\";s:1:\"1\";s:9:\"NOENDTIME\";s:1:\"0\";s:7:\"X-COLOR\";s:0:\"\";s:9:\"LOCKEVENT\";s:1:\"0\";}','',6,1,0,0,0);
+/*!40000 ALTER TABLE `jos_jevents_vevent` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_menu`
+--
+
+DROP TABLE IF EXISTS `jos_menu`;
+CREATE TABLE `jos_menu` (
+  `id` int(11) NOT NULL auto_increment,
+  `menutype` varchar(75) default NULL,
+  `name` varchar(255) default NULL,
+  `alias` varchar(255) NOT NULL default '',
+  `link` text,
+  `type` varchar(50) NOT NULL default '',
+  `published` tinyint(1) NOT NULL default '0',
+  `parent` int(11) unsigned NOT NULL default '0',
+  `componentid` int(11) unsigned NOT NULL default '0',
+  `sublevel` int(11) default '0',
+  `ordering` int(11) default '0',
+  `checked_out` int(11) unsigned NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `pollid` int(11) NOT NULL default '0',
+  `browserNav` tinyint(4) default '0',
+  `access` tinyint(3) unsigned NOT NULL default '0',
+  `utaccess` tinyint(3) unsigned NOT NULL default '0',
+  `params` text NOT NULL,
+  `lft` int(11) unsigned NOT NULL default '0',
+  `rgt` int(11) unsigned NOT NULL default '0',
+  `home` int(1) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `componentid` (`componentid`,`menutype`,`published`,`access`),
+  KEY `menutype` (`menutype`)
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_menu`
+--
+
+LOCK TABLES `jos_menu` WRITE;
+/*!40000 ALTER TABLE `jos_menu` DISABLE KEYS */;
+INSERT INTO `jos_menu` VALUES (1,'navmenu','Home','home','index.php?option=com_content&view=frontpage','component',1,0,20,0,1,0,'0000-00-00 00:00:00',0,0,0,3,'num_leading_articles=1\nnum_intro_articles=4\nnum_columns=2\nnum_links=4\norderby_pri=\norderby_sec=front\nmulti_column_order=1\nshow_pagination=2\nshow_pagination_results=1\nshow_feed_link=1\nshow_noauth=\nshow_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_item_navigation=\nshow_readmore=\nshow_vote=\nshow_icons=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nshow_hits=\nfeed_summary=\npage_title=\nshow_page_title=1\npageclass_sfx=\nmenu_image=-1\nsecure=0\n\n',0,0,1),(2,'navmenu','News','cora-news','index.php?option=com_content&view=section&layout=blog&id=1','component',1,0,20,0,4,0,'0000-00-00 00:00:00',0,0,0,0,'show_description=0\nshow_description_image=0\nnum_leading_articles=1\nnum_intro_articles=4\nnum_columns=2\nnum_links=4\norderby_pri=\norderby_sec=rdate\nmulti_column_order=0\nshow_pagination=2\nshow_pagination_results=1\nshow_feed_link=1\nshow_noauth=\nshow_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_item_navigation=\nshow_readmore=\nshow_vote=\nshow_icons=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nshow_hits=\nfeed_summary=\npage_title=\nshow_page_title=1\npageclass_sfx=\nmenu_image=-1\nsecure=0\n\n',0,0,0),(3,'navmenu','Photos','photos','index.php?option=com_content&view=section&layout=blog&id=2','component',1,0,20,0,5,0,'0000-00-00 00:00:00',0,0,0,0,'show_description=0\nshow_description_image=0\nnum_leading_articles=1\nnum_intro_articles=4\nnum_columns=2\nnum_links=4\norderby_pri=\norderby_sec=rdate\nmulti_column_order=0\nshow_pagination=2\nshow_pagination_results=1\nshow_feed_link=1\nshow_noauth=\nshow_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_item_navigation=\nshow_readmore=\nshow_vote=\nshow_icons=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nshow_hits=\nfeed_summary=\npage_title=\nshow_page_title=1\npageclass_sfx=\nmenu_image=-1\nsecure=0\n\n',0,0,0),(4,'mainmenu','View Events','view-events','index.php?option=com_jevents&view=month&task=month.calendar','component',1,0,34,0,4,0,'0000-00-00 00:00:00',0,0,0,0,'com_calViewName=\ncom_calUseIconic=\ncatid0=0\ncatid1=0\ncatid2=0\ncatid3=0\ncatid4=0\ncatid5=0\ncatid6=0\ncatid7=0\ncatid8=0\ncatid9=0\ncatid10=0\nshowyearpast=\nlayout=\npage_title=\nshow_page_title=1\npageclass_sfx=\nmenu_image=-1\nsecure=0\n\n',0,0,0),(5,'navmenu','About','about-cora','index.php?option=com_content&view=article&id=8','component',1,0,20,0,3,0,'0000-00-00 00:00:00',0,0,0,0,'show_noauth=\nshow_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_item_navigation=\nshow_readmore=\nshow_vote=\nshow_icons=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nshow_hits=\nfeed_summary=\npage_title=\nshow_page_title=1\npageclass_sfx=\nmenu_image=-1\nsecure=0\n\n',0,0,0),(6,'navmenu','Copyright','copyright','index.php?option=com_content&view=article&id=9','component',-2,0,20,0,2,0,'0000-00-00 00:00:00',0,0,0,0,'show_noauth=\nshow_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_item_navigation=\nshow_readmore=\nshow_vote=\nshow_icons=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nshow_hits=\nfeed_summary=\npage_title=\nshow_page_title=1\npageclass_sfx=\nmenu_image=-1\nsecure=0\n\n',0,0,0),(7,'navmenu','pages','pages','index.php?option=com_content&view=category&id=5','component',-2,0,20,0,6,0,'0000-00-00 00:00:00',0,0,0,0,'display_num=10\nshow_headings=1\nshow_date=0\ndate_format=\nfilter=1\nfilter_type=title\norderby_sec=\nshow_pagination=1\nshow_pagination_limit=1\nshow_feed_link=1\nshow_noauth=\nshow_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_item_navigation=\nshow_readmore=\nshow_vote=\nshow_icons=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nshow_hits=\nfeed_summary=\npage_title=\nshow_page_title=1\npageclass_sfx=\nmenu_image=-1\nsecure=0\n\n',0,0,0),(14,'navmenu','User Submissions','user-submissions','index.php?option=com_content&view=section&id=5','component',0,0,20,0,7,62,'2011-07-26 22:00:20',0,0,0,0,'show_description=1\nshow_description_image=0\nshow_categories=1\nshow_empty_categories=1\nshow_cat_num_articles=1\nshow_category_description=1\norderby=\norderby_sec=\nshow_feed_link=1\nshow_noauth=\nshow_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_item_navigation=\nshow_readmore=\nshow_vote=\nshow_icons=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nshow_hits=\nfeed_summary=\npage_title=\nshow_page_title=1\npageclass_sfx=\nmenu_image=-1\nsecure=0\n\n',0,0,0),(13,'hidden-menu','Copyright','copyright','index.php?option=com_content&view=article&id=9','component',1,0,20,0,1,0,'0000-00-00 00:00:00',0,0,0,0,'show_noauth=\nshow_title=\nlink_titles=\nshow_intro=\nshow_section=\nlink_section=\nshow_category=\nlink_category=\nshow_author=\nshow_create_date=\nshow_modify_date=\nshow_item_navigation=\nshow_readmore=\nshow_vote=\nshow_icons=\nshow_pdf_icon=\nshow_print_icon=\nshow_email_icon=\nshow_hits=\nfeed_summary=\npage_title=\nshow_page_title=1\npageclass_sfx=\nmenu_image=-1\nsecure=0\n\n',0,0,0);
+/*!40000 ALTER TABLE `jos_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_menu_types`
+--
+
+DROP TABLE IF EXISTS `jos_menu_types`;
+CREATE TABLE `jos_menu_types` (
+  `id` int(10) unsigned NOT NULL auto_increment,
+  `menutype` varchar(75) NOT NULL default '',
+  `title` varchar(255) NOT NULL default '',
+  `description` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `menutype` (`menutype`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_menu_types`
+--
+
+LOCK TABLES `jos_menu_types` WRITE;
+/*!40000 ALTER TABLE `jos_menu_types` DISABLE KEYS */;
+INSERT INTO `jos_menu_types` VALUES (1,'mainmenu','Main Menu','The main menu for the site'),(2,'navmenu','Navbar Menu',''),(4,'hidden-menu','Hidden menu','a hidden menu for easier linking');
+/*!40000 ALTER TABLE `jos_menu_types` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_messages`
+--
+
+DROP TABLE IF EXISTS `jos_messages`;
+CREATE TABLE `jos_messages` (
+  `message_id` int(10) unsigned NOT NULL auto_increment,
+  `user_id_from` int(10) unsigned NOT NULL default '0',
+  `user_id_to` int(10) unsigned NOT NULL default '0',
+  `folder_id` int(10) unsigned NOT NULL default '0',
+  `date_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `state` int(11) NOT NULL default '0',
+  `priority` int(1) unsigned NOT NULL default '0',
+  `subject` text NOT NULL,
+  `message` text NOT NULL,
+  PRIMARY KEY  (`message_id`),
+  KEY `useridto_state` (`user_id_to`,`state`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_messages`
+--
+
+LOCK TABLES `jos_messages` WRITE;
+/*!40000 ALTER TABLE `jos_messages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_messages_cfg`
+--
+
+DROP TABLE IF EXISTS `jos_messages_cfg`;
+CREATE TABLE `jos_messages_cfg` (
+  `user_id` int(10) unsigned NOT NULL default '0',
+  `cfg_name` varchar(100) NOT NULL default '',
+  `cfg_value` varchar(255) NOT NULL default '',
+  UNIQUE KEY `idx_user_var_name` (`user_id`,`cfg_name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_messages_cfg`
+--
+
+LOCK TABLES `jos_messages_cfg` WRITE;
+/*!40000 ALTER TABLE `jos_messages_cfg` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_messages_cfg` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_migration_backlinks`
+--
+
+DROP TABLE IF EXISTS `jos_migration_backlinks`;
+CREATE TABLE `jos_migration_backlinks` (
+  `itemid` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `url` text NOT NULL,
+  `sefurl` text NOT NULL,
+  `newurl` text NOT NULL,
+  PRIMARY KEY  (`itemid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_migration_backlinks`
+--
+
+LOCK TABLES `jos_migration_backlinks` WRITE;
+/*!40000 ALTER TABLE `jos_migration_backlinks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_migration_backlinks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_modules`
+--
+
+DROP TABLE IF EXISTS `jos_modules`;
+CREATE TABLE `jos_modules` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` text NOT NULL,
+  `content` text NOT NULL,
+  `ordering` int(11) NOT NULL default '0',
+  `position` varchar(50) default NULL,
+  `checked_out` int(11) unsigned NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `published` tinyint(1) NOT NULL default '0',
+  `module` varchar(50) default NULL,
+  `numnews` int(11) NOT NULL default '0',
+  `access` tinyint(3) unsigned NOT NULL default '0',
+  `showtitle` tinyint(3) unsigned NOT NULL default '1',
+  `params` text NOT NULL,
+  `iscore` tinyint(4) NOT NULL default '0',
+  `client_id` tinyint(4) NOT NULL default '0',
+  `control` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `published` (`published`,`access`),
+  KEY `newsfeeds` (`module`,`published`)
+) ENGINE=MyISAM AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_modules`
+--
+
+LOCK TABLES `jos_modules` WRITE;
+/*!40000 ALTER TABLE `jos_modules` DISABLE KEYS */;
+INSERT INTO `jos_modules` VALUES (1,'Main Menu','',0,'left',0,'0000-00-00 00:00:00',1,'mod_mainmenu',0,0,1,'menutype=mainmenu\nmenu_style=list\nstartLevel=0\nendLevel=0\nshowAllChildren=0\nwindow_open=\nshow_whitespace=0\ncache=1\ntag_id=\nclass_sfx=\nmoduleclass_sfx=_menu\nmaxdepth=10\nmenu_images=0\nmenu_images_align=0\nmenu_images_link=0\nexpand_menu=0\nactivate_parent=0\nfull_active_id=0\nindent_image=0\nindent_image1=\nindent_image2=\nindent_image3=\nindent_image4=\nindent_image5=\nindent_image6=\nspacer=\nend_spacer=\n\n',1,0,''),(2,'Login','',1,'login',0,'0000-00-00 00:00:00',1,'mod_login',0,0,1,'',1,1,''),(3,'Popular','',3,'cpanel',0,'0000-00-00 00:00:00',1,'mod_popular',0,2,1,'',0,1,''),(4,'Recent added Articles','',4,'cpanel',0,'0000-00-00 00:00:00',1,'mod_latest',0,2,1,'ordering=c_dsc\nuser_id=0\ncache=0\n\n',0,1,''),(5,'Menu Stats','',5,'cpanel',0,'0000-00-00 00:00:00',1,'mod_stats',0,2,1,'',0,1,''),(6,'Unread Messages','',1,'header',0,'0000-00-00 00:00:00',1,'mod_unread',0,2,1,'',1,1,''),(7,'Online Users','',2,'header',0,'0000-00-00 00:00:00',1,'mod_online',0,2,1,'',1,1,''),(8,'Toolbar','',1,'toolbar',0,'0000-00-00 00:00:00',1,'mod_toolbar',0,2,1,'',1,1,''),(9,'Quick Icons','',1,'icon',0,'0000-00-00 00:00:00',1,'mod_quickicon',0,2,1,'',1,1,''),(10,'Logged in Users','',2,'cpanel',0,'0000-00-00 00:00:00',1,'mod_logged',0,2,1,'',0,1,''),(11,'Footer','',0,'footer',0,'0000-00-00 00:00:00',1,'mod_footer',0,0,1,'',1,1,''),(12,'Admin Menu','',1,'menu',0,'0000-00-00 00:00:00',1,'mod_menu',0,2,1,'',0,1,''),(13,'Admin SubMenu','',1,'submenu',0,'0000-00-00 00:00:00',1,'mod_submenu',0,2,1,'',0,1,''),(14,'User Status','',1,'status',0,'0000-00-00 00:00:00',1,'mod_status',0,2,1,'',0,1,''),(15,'Title','',1,'title',0,'0000-00-00 00:00:00',1,'mod_title',0,2,1,'',0,1,''),(16,'Login','',0,'left',0,'0000-00-00 00:00:00',1,'mod_itpconnect',0,0,1,'cache=0\nmoduleclass_sfx=\npretext=\nposttext=\nlogin=2\nlogout=1\ngreeting=1\nname=1\nusesecure=0\nfbShowImage=1\nfbImageSize=small\nfbPerms=email,publish_stream\n\n',0,0,''),(18,'Site Banner','',0,'slideshow1',0,'0000-00-00 00:00:00',1,'mod_sigplus',0,0,0,'images_folder=user_media/sigplus/banners\nlayout=fixed\nrows=1\ncols=1\nthumb_count=0\nthumb_width=800\nthumb_height=300\nthumb_crop=1\nalignment=before-float\nlightbox=none\nlightbox_slideshow=3000\nslider=boxplus.transition\nslider_orientation=horizontal\nslider_navigation=bottom\nslider_buttons=0\nslider_links=0\nslider_counter=0\nslider_overlay=1\nslider_duration=800\nslider_animation=6000\ncaptions=none\ncaption_title=\ncaption_description=\ndownload=0\nmetadata=0\nmargin=\nborder_style=\nborder_width=\nborder_color=\npadding=\nthumb_cache=1\nthumb_folder=thumbs\npreview_folder=preview\nfullsize_folder=fullsize\nbase_url=\nthumb_quality=85\nlabels=labels\nlabels_multilingual=0\nsort_criterion=labels-filename\nsort_order=0\nlinkage=inline\najaxapi=default\nlibrary=default\nmoduleclass_sfx=\ndebug=0\nsettings=\n\n',0,0,''),(19,'Latest News','',0,'bottom1',0,'0000-00-00 00:00:00',1,'mod_newsflash',0,0,1,'catid=2\nlayout=default\nimage=1\nlink_titles=1\nshowLastSeparator=1\nreadmore=1\nitem_title=1\nitems=1\nmoduleclass_sfx=\ncache=0\ncache_time=900\n\n',0,0,''),(20,'Newest Media','',0,'bottom2',0,'0000-00-00 00:00:00',1,'mod_newsflash',0,0,1,'catid=3\nlayout=vert\nimage=1\nlink_titles=1\nshowLastSeparator=1\nreadmore=1\nitem_title=1\nitems=1\nmoduleclass_sfx=\ncache=0\ncache_time=900\n\n',0,0,''),(25,'Cora\'s Calendar','',0,'bottom3',0,'0000-00-00 00:00:00',1,'mod_jevents_cal',0,0,1,'inc_ec_css=1\ncache=1\nmoduleclass_sfx=\nnoeventcheck=0\nallcats=1\ncatid0=0\ncatid1=0\ncatid2=0\ncatid3=0\ncatid4=0\nignorecatfilter=0\nignorefiltermodule=0\ntarget_itemid=\nminical_showlink=1\nminical_prevyear=1\nminical_prevmonth=1\nminical_actmonth=1\nminical_actyear=1\nminical_nextmonth=1\nminical_nextyear=1\nminical_usedate=0\nmodcal_useLocalParam=0\nmodcal_DispLastMonth=NO\nmodcal_DispLastMonthDays=0\nmodcal_DispNextMonth=NO\nmodcal_DispNextMonthDays=0\nmodcal_LinkCloaking=0\n\n',0,0,''),(26,'Navbar Menu','',0,'nav-menu',0,'0000-00-00 00:00:00',1,'mod_mainmenu',0,0,0,'menutype=navmenu\nmenu_style=list\nstartLevel=0\nendLevel=0\nshowAllChildren=0\nwindow_open=\nshow_whitespace=0\ncache=1\ntag_id=\nclass_sfx=\nmoduleclass_sfx=\nmaxdepth=10\nmenu_images=0\nmenu_images_align=0\nmenu_images_link=0\nexpand_menu=0\nactivate_parent=0\nfull_active_id=0\nindent_image=0\nindent_image1=\nindent_image2=\nindent_image3=\nindent_image4=\nindent_image5=\nindent_image6=\nspacer=\nend_spacer=\n\n',0,0,''),(27,'Copyright','<p>© 2011 Shanin Fox and Josh Wickham<br /> More information <a href=\"copyright\">here</a></p>',0,'copyright',0,'0000-00-00 00:00:00',1,'mod_custom',0,0,0,'moduleclass_sfx=\n\n',0,0,'');
+/*!40000 ALTER TABLE `jos_modules` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_modules_menu`
+--
+
+DROP TABLE IF EXISTS `jos_modules_menu`;
+CREATE TABLE `jos_modules_menu` (
+  `moduleid` int(11) NOT NULL default '0',
+  `menuid` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`moduleid`,`menuid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_modules_menu`
+--
+
+LOCK TABLES `jos_modules_menu` WRITE;
+/*!40000 ALTER TABLE `jos_modules_menu` DISABLE KEYS */;
+INSERT INTO `jos_modules_menu` VALUES (18,0),(19,1),(20,1),(25,1),(26,0),(27,0),(28,0);
+/*!40000 ALTER TABLE `jos_modules_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_newsfeeds`
+--
+
+DROP TABLE IF EXISTS `jos_newsfeeds`;
+CREATE TABLE `jos_newsfeeds` (
+  `catid` int(11) NOT NULL default '0',
+  `id` int(11) NOT NULL auto_increment,
+  `name` text NOT NULL,
+  `alias` varchar(255) NOT NULL default '',
+  `link` text NOT NULL,
+  `filename` varchar(200) default NULL,
+  `published` tinyint(1) NOT NULL default '0',
+  `numarticles` int(11) unsigned NOT NULL default '1',
+  `cache_time` int(11) unsigned NOT NULL default '3600',
+  `checked_out` tinyint(3) unsigned NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `ordering` int(11) NOT NULL default '0',
+  `rtl` tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `published` (`published`),
+  KEY `catid` (`catid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_newsfeeds`
+--
+
+LOCK TABLES `jos_newsfeeds` WRITE;
+/*!40000 ALTER TABLE `jos_newsfeeds` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_newsfeeds` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_plugins`
+--
+
+DROP TABLE IF EXISTS `jos_plugins`;
+CREATE TABLE `jos_plugins` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(100) NOT NULL default '',
+  `element` varchar(100) NOT NULL default '',
+  `folder` varchar(100) NOT NULL default '',
+  `access` tinyint(3) unsigned NOT NULL default '0',
+  `ordering` int(11) NOT NULL default '0',
+  `published` tinyint(3) NOT NULL default '0',
+  `iscore` tinyint(3) NOT NULL default '0',
+  `client_id` tinyint(3) NOT NULL default '0',
+  `checked_out` int(11) unsigned NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `params` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `idx_folder` (`published`,`client_id`,`access`,`folder`)
+) ENGINE=MyISAM AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_plugins`
+--
+
+LOCK TABLES `jos_plugins` WRITE;
+/*!40000 ALTER TABLE `jos_plugins` DISABLE KEYS */;
+INSERT INTO `jos_plugins` VALUES (1,'Authentication - Joomla','joomla','authentication',0,1,1,1,0,0,'0000-00-00 00:00:00',''),(2,'Authentication - LDAP','ldap','authentication',0,2,0,1,0,0,'0000-00-00 00:00:00','host=\nport=389\nuse_ldapV3=0\nnegotiate_tls=0\nno_referrals=0\nauth_method=bind\nbase_dn=\nsearch_string=\nusers_dn=\nusername=\npassword=\nldap_fullname=fullName\nldap_email=mail\nldap_uid=uid\n\n'),(3,'Authentication - GMail','gmail','authentication',0,4,0,0,0,0,'0000-00-00 00:00:00',''),(4,'Authentication - OpenID','openid','authentication',0,3,0,0,0,0,'0000-00-00 00:00:00',''),(5,'User - Joomla!','joomla','user',0,0,1,0,0,0,'0000-00-00 00:00:00','autoregister=1\n\n'),(6,'Search - Content','content','search',0,1,1,1,0,0,'0000-00-00 00:00:00','search_limit=50\nsearch_content=1\nsearch_uncategorised=1\nsearch_archived=1\n\n'),(7,'Search - Contacts','contacts','search',0,3,1,1,0,0,'0000-00-00 00:00:00','search_limit=50\n\n'),(8,'Search - Categories','categories','search',0,4,1,0,0,0,'0000-00-00 00:00:00','search_limit=50\n\n'),(9,'Search - Sections','sections','search',0,5,1,0,0,0,'0000-00-00 00:00:00','search_limit=50\n\n'),(10,'Search - Newsfeeds','newsfeeds','search',0,6,1,0,0,0,'0000-00-00 00:00:00','search_limit=50\n\n'),(11,'Search - Weblinks','weblinks','search',0,2,1,1,0,0,'0000-00-00 00:00:00','search_limit=50\n\n'),(12,'Content - Pagebreak','pagebreak','content',0,10000,1,1,0,0,'0000-00-00 00:00:00','enabled=1\ntitle=1\nmultipage_toc=1\nshowall=1\n\n'),(13,'Content - Rating','vote','content',0,4,1,1,0,0,'0000-00-00 00:00:00',''),(14,'Content - Email Cloaking','emailcloak','content',0,5,1,0,0,0,'0000-00-00 00:00:00','mode=1\n\n'),(15,'Content - Code Hightlighter (GeSHi)','geshi','content',0,5,0,0,0,0,'0000-00-00 00:00:00',''),(16,'Content - Load Module','loadmodule','content',0,6,1,0,0,0,'0000-00-00 00:00:00','enabled=1\nstyle=0\n\n'),(17,'Content - Page Navigation','pagenavigation','content',0,2,1,1,0,0,'0000-00-00 00:00:00','position=1\n\n'),(18,'Editor - No Editor','none','editors',0,0,1,1,0,0,'0000-00-00 00:00:00',''),(19,'Editor - TinyMCE','tinymce','editors',0,0,1,1,0,0,'0000-00-00 00:00:00','mode=advanced\nskin=0\ncompressed=0\ncleanup_startup=0\ncleanup_save=2\nentity_encoding=raw\nlang_mode=0\nlang_code=en\ntext_direction=ltr\ncontent_css=1\ncontent_css_custom=\nrelative_urls=1\nnewlines=0\ninvalid_elements=applet\nextended_elements=\ntoolbar=top\ntoolbar_align=left\nhtml_height=550\nhtml_width=750\nelement_path=1\nfonts=1\npaste=1\nsearchreplace=1\ninsertdate=1\nformat_date=%Y-%m-%d\ninserttime=1\nformat_time=%H:%M:%S\ncolors=1\ntable=1\nsmilies=1\nmedia=1\nhr=1\ndirectionality=1\nfullscreen=1\nstyle=1\nlayer=1\nxhtmlxtras=1\nvisualchars=1\nnonbreaking=1\ntemplate=0\nadvimage=1\nadvlink=1\nautosave=1\ncontextmenu=1\ninlinepopups=1\nsafari=1\ncustom_plugin=\ncustom_button=\n\n'),(20,'Editor - XStandard Lite 2.0','xstandard','editors',0,0,0,1,0,0,'0000-00-00 00:00:00',''),(21,'Editor Button - Image','image','editors-xtd',0,0,1,0,0,0,'0000-00-00 00:00:00',''),(22,'Editor Button - Pagebreak','pagebreak','editors-xtd',0,0,1,0,0,0,'0000-00-00 00:00:00',''),(23,'Editor Button - Readmore','readmore','editors-xtd',0,0,1,0,0,0,'0000-00-00 00:00:00',''),(24,'XML-RPC - Joomla','joomla','xmlrpc',0,7,0,1,0,0,'0000-00-00 00:00:00',''),(25,'XML-RPC - Blogger API','blogger','xmlrpc',0,7,0,1,0,0,'0000-00-00 00:00:00','catid=1\nsectionid=0\n\n'),(27,'System - SEF','sef','system',0,1,1,0,0,0,'0000-00-00 00:00:00',''),(28,'System - Debug','debug','system',0,2,1,0,0,0,'0000-00-00 00:00:00','queries=1\nmemory=1\nlangauge=1\n\n'),(29,'System - Legacy','legacy','system',0,3,0,1,0,0,'0000-00-00 00:00:00','route=0\n\n'),(30,'System - Cache','cache','system',0,4,0,1,0,0,'0000-00-00 00:00:00','browsercache=0\ncachetime=15\n\n'),(31,'System - Log','log','system',0,5,0,1,0,0,'0000-00-00 00:00:00',''),(32,'System - Remember Me','remember','system',0,6,1,1,0,0,'0000-00-00 00:00:00',''),(33,'System - Backlink','backlink','system',0,7,0,1,0,0,'0000-00-00 00:00:00',''),(34,'System - Mootools Upgrade','mtupgrade','system',0,8,0,1,0,0,'0000-00-00 00:00:00',''),(35,'System - ITPConnect','itpconnect','system',0,0,1,0,0,0,'0000-00-00 00:00:00',''),(36,'User - ITPConnect','itpconnect','user',0,0,1,0,0,0,'0000-00-00 00:00:00',''),(37,'Authentication - ITPConnect','itpconnect','authentication',0,0,1,0,0,0,'0000-00-00 00:00:00',''),(38,'Content - Image gallery - sigplus','sigplus','content',0,0,1,0,0,0,'0000-00-00 00:00:00','base_folder=user_media/sigplus\nlayout=fixed\nrows=1\ncols=3\nthumb_count=0\nthumb_width=200\nthumb_height=200\nthumb_crop=1\nalignment=center\nlightbox=boxplus/lightsquare\nlightbox_slideshow=0\nslider=boxplus.slider\nslider_orientation=horizontal\nslider_navigation=bottom\nslider_buttons=1\nslider_links=1\nslider_counter=1\nslider_overlay=0\nslider_duration=800\nslider_animation=0\ncaptions=none\ncaption_title=\ncaption_description=\ndownload=0\nmetadata=0\nmargin=\nborder_style=\nborder_width=\nborder_color=\npadding=\nthumb_cache=1\nthumb_folder=thumbs\npreview_folder=preview\nfullsize_folder=fullsize\nbase_url=\nthumb_quality=85\nlabels=labels\nlabels_multilingual=0\nsort_criterion=labels-filename\nsort_order=0\nlinkage=inline\najaxapi=default\nlibrary=default\nactivationtag=gallery\ndebug=1\nsettings=\n\n'),(39,'Content - JPlayer','jplayer','content',0,0,1,0,0,0,'0000-00-00 00:00:00','videofolder=user_media/video\nvideowidth=400\nvideoheight=300\naudiofolder=user_media/audio\naudiowidth=300\naudioheight=20\nyoutuberelated=1\nyoutubeborder=0\nyoutubecolors=0\nyoutuberesolution=2\nyoutubewidth=480\nyoutubeheight=385\nplaylistfolder=user_media/playlist\nplaylistsize=350\nplaylistposition=bottom\nshuffle=0\nplayerversion=4-3-132\ncontrolbar=bottom\ntransparency=transparent\nbackground=#FFFFFF\nbackcolor=\nfrontcolor=\nlightcolor=\nscreencolor=\nfullscreen=1\nautoplay=0\nrepeat=none\ndownloadLink=0\nskin=\nlogo=\njplayerLink=0\nregisteredonly=0\nregisteredonlymsg=Only registered users can view player\ndebugMode=0\n\n');
+/*!40000 ALTER TABLE `jos_plugins` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_poll_data`
+--
+
+DROP TABLE IF EXISTS `jos_poll_data`;
+CREATE TABLE `jos_poll_data` (
+  `id` int(11) NOT NULL auto_increment,
+  `pollid` int(11) NOT NULL default '0',
+  `text` text NOT NULL,
+  `hits` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `pollid` (`pollid`,`text`(1))
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_poll_data`
+--
+
+LOCK TABLES `jos_poll_data` WRITE;
+/*!40000 ALTER TABLE `jos_poll_data` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_poll_data` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_poll_date`
+--
+
+DROP TABLE IF EXISTS `jos_poll_date`;
+CREATE TABLE `jos_poll_date` (
+  `id` bigint(20) NOT NULL auto_increment,
+  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `vote_id` int(11) NOT NULL default '0',
+  `poll_id` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`),
+  KEY `poll_id` (`poll_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_poll_date`
+--
+
+LOCK TABLES `jos_poll_date` WRITE;
+/*!40000 ALTER TABLE `jos_poll_date` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_poll_date` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_poll_menu`
+--
+
+DROP TABLE IF EXISTS `jos_poll_menu`;
+CREATE TABLE `jos_poll_menu` (
+  `pollid` int(11) NOT NULL default '0',
+  `menuid` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`pollid`,`menuid`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_poll_menu`
+--
+
+LOCK TABLES `jos_poll_menu` WRITE;
+/*!40000 ALTER TABLE `jos_poll_menu` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_poll_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_polls`
+--
+
+DROP TABLE IF EXISTS `jos_polls`;
+CREATE TABLE `jos_polls` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `title` varchar(255) NOT NULL default '',
+  `alias` varchar(255) NOT NULL default '',
+  `voters` int(9) NOT NULL default '0',
+  `checked_out` int(11) NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `published` tinyint(1) NOT NULL default '0',
+  `access` int(11) NOT NULL default '0',
+  `lag` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_polls`
+--
+
+LOCK TABLES `jos_polls` WRITE;
+/*!40000 ALTER TABLE `jos_polls` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_polls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_sections`
+--
+
+DROP TABLE IF EXISTS `jos_sections`;
+CREATE TABLE `jos_sections` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(255) NOT NULL default '',
+  `name` varchar(255) NOT NULL default '',
+  `alias` varchar(255) NOT NULL default '',
+  `image` text NOT NULL,
+  `scope` varchar(50) NOT NULL default '',
+  `image_position` varchar(30) NOT NULL default '',
+  `description` text NOT NULL,
+  `published` tinyint(1) NOT NULL default '0',
+  `checked_out` int(11) unsigned NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `ordering` int(11) NOT NULL default '0',
+  `access` tinyint(3) unsigned NOT NULL default '0',
+  `count` int(11) NOT NULL default '0',
+  `params` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `idx_scope` (`scope`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_sections`
+--
+
+LOCK TABLES `jos_sections` WRITE;
+/*!40000 ALTER TABLE `jos_sections` DISABLE KEYS */;
+INSERT INTO `jos_sections` VALUES (1,'Blog','','blog','','content','left','',1,62,'2011-07-14 06:10:05',1,0,2,''),(2,'Photos','','photos','','content','left','',1,0,'0000-00-00 00:00:00',2,0,1,''),(3,'Videos','','videos','','content','left','',1,0,'0000-00-00 00:00:00',3,0,1,''),(4,'Pages','','pages','','content','left','',1,0,'0000-00-00 00:00:00',4,0,2,''),(5,'User-Submitted','','user-submitted','','content','left','<p>A collection of pictures, experiences, links, etc. that Cora\'s fans have submitted over time.</p>',1,0,'0000-00-00 00:00:00',5,0,2,'');
+/*!40000 ALTER TABLE `jos_sections` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_session`
+--
+
+DROP TABLE IF EXISTS `jos_session`;
+CREATE TABLE `jos_session` (
+  `username` varchar(150) default '',
+  `time` varchar(14) default '',
+  `session_id` varchar(200) NOT NULL default '0',
+  `guest` tinyint(4) default '1',
+  `userid` int(11) default '0',
+  `usertype` varchar(50) default '',
+  `gid` tinyint(3) unsigned NOT NULL default '0',
+  `client_id` tinyint(3) unsigned NOT NULL default '0',
+  `data` longtext,
+  PRIMARY KEY  (`session_id`(64)),
+  KEY `whosonline` (`guest`,`usertype`),
+  KEY `userid` (`userid`),
+  KEY `time` (`time`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_session`
+--
+
+LOCK TABLES `jos_session` WRITE;
+/*!40000 ALTER TABLE `jos_session` DISABLE KEYS */;
+INSERT INTO `jos_session` VALUES ('','1320766298','dqcbma6vjfgp1hhq6v3sqdaeo2',1,0,'',0,0,'__default|a:7:{s:15:\"session.counter\";i:2;s:19:\"session.timer.start\";i:1320766290;s:18:\"session.timer.last\";i:1320766290;s:17:\"session.timer.now\";i:1320766298;s:22:\"session.client.browser\";s:102:\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.106 Safari/535.2\";s:8:\"registry\";O:9:\"JRegistry\":3:{s:17:\"_defaultNameSpace\";s:7:\"session\";s:9:\"_registry\";a:1:{s:7:\"session\";a:1:{s:4:\"data\";O:8:\"stdClass\":0:{}}}s:7:\"_errors\";a:0:{}}s:4:\"user\";O:5:\"JUser\":19:{s:2:\"id\";i:0;s:4:\"name\";N;s:8:\"username\";N;s:5:\"email\";N;s:8:\"password\";N;s:14:\"password_clear\";s:0:\"\";s:8:\"usertype\";N;s:5:\"block\";N;s:9:\"sendEmail\";i:0;s:3:\"gid\";i:0;s:12:\"registerDate\";N;s:13:\"lastvisitDate\";N;s:10:\"activation\";N;s:6:\"params\";N;s:3:\"aid\";i:0;s:5:\"guest\";i:1;s:7:\"_params\";O:10:\"JParameter\":7:{s:4:\"_raw\";s:0:\"\";s:4:\"_xml\";N;s:9:\"_elements\";a:0:{}s:12:\"_elementPath\";a:1:{i:0;s:73:\"/home/content/79/8047279/build/26/libraries/joomla/html/parameter/element\";}s:17:\"_defaultNameSpace\";s:8:\"_default\";s:9:\"_registry\";a:1:{s:8:\"_default\";a:1:{s:4:\"data\";O:8:\"stdClass\":0:{}}}s:7:\"_errors\";a:0:{}}s:9:\"_errorMsg\";N;s:7:\"_errors\";a:0:{}}}'),('facebook_crap','1320766312','eojug595d18hj99kgalrsljrt2',0,65,'Registered',18,0,'__default|a:7:{s:15:\"session.counter\";i:10;s:19:\"session.timer.start\";i:1320766290;s:18:\"session.timer.last\";i:1320766311;s:17:\"session.timer.now\";i:1320766312;s:22:\"session.client.browser\";s:102:\"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.2 (KHTML, like Gecko) Chrome/15.0.874.106 Safari/535.2\";s:8:\"registry\";O:9:\"JRegistry\":3:{s:17:\"_defaultNameSpace\";s:7:\"session\";s:9:\"_registry\";a:1:{s:7:\"session\";a:1:{s:4:\"data\";O:8:\"stdClass\":0:{}}}s:7:\"_errors\";a:0:{}}s:4:\"user\";O:5:\"JUser\":19:{s:2:\"id\";s:2:\"65\";s:4:\"name\";s:12:\"Josh Wickham\";s:8:\"username\";s:13:\"facebook_crap\";s:5:\"email\";s:24:\"facebook_crap@i-josh.com\";s:8:\"password\";s:65:\"18adb525738c1cb5eced848dd2f7d1e2:gaAazvlLYlE11Xmhpd30ojcG1HZBzbi9\";s:14:\"password_clear\";s:0:\"\";s:8:\"usertype\";s:10:\"Registered\";s:5:\"block\";s:1:\"0\";s:9:\"sendEmail\";s:1:\"0\";s:3:\"gid\";s:2:\"18\";s:12:\"registerDate\";s:19:\"2011-07-12 06:09:03\";s:13:\"lastvisitDate\";s:19:\"2011-09-26 02:12:08\";s:10:\"activation\";s:0:\"\";s:6:\"params\";s:1:\"\n\";s:3:\"aid\";i:1;s:5:\"guest\";i:0;s:7:\"_params\";O:10:\"JParameter\":7:{s:4:\"_raw\";s:0:\"\";s:4:\"_xml\";N;s:9:\"_elements\";a:0:{}s:12:\"_elementPath\";a:1:{i:0;s:73:\"/home/content/79/8047279/build/26/libraries/joomla/html/parameter/element\";}s:17:\"_defaultNameSpace\";s:8:\"_default\";s:9:\"_registry\";a:1:{s:8:\"_default\";a:1:{s:4:\"data\";O:8:\"stdClass\":0:{}}}s:7:\"_errors\";a:0:{}}s:9:\"_errorMsg\";N;s:7:\"_errors\";a:0:{}}}'),('','1320766309','e1ad8jdlkgja3hu96krcomaqs5',1,0,'',0,0,'__default|a:8:{s:15:\"session.counter\";i:1;s:19:\"session.timer.start\";i:1320766309;s:18:\"session.timer.last\";i:1320766309;s:17:\"session.timer.now\";i:1320766309;s:24:\"session.client.forwarded\";s:12:\"10.62.213.54\";s:22:\"session.client.browser\";s:73:\"facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)\";s:8:\"registry\";O:9:\"JRegistry\":3:{s:17:\"_defaultNameSpace\";s:7:\"session\";s:9:\"_registry\";a:1:{s:7:\"session\";a:1:{s:4:\"data\";O:8:\"stdClass\":0:{}}}s:7:\"_errors\";a:0:{}}s:4:\"user\";O:5:\"JUser\":19:{s:2:\"id\";i:0;s:4:\"name\";N;s:8:\"username\";N;s:5:\"email\";N;s:8:\"password\";N;s:14:\"password_clear\";s:0:\"\";s:8:\"usertype\";N;s:5:\"block\";N;s:9:\"sendEmail\";i:0;s:3:\"gid\";i:0;s:12:\"registerDate\";N;s:13:\"lastvisitDate\";N;s:10:\"activation\";N;s:6:\"params\";N;s:3:\"aid\";i:0;s:5:\"guest\";i:1;s:7:\"_params\";O:10:\"JParameter\":7:{s:4:\"_raw\";s:0:\"\";s:4:\"_xml\";N;s:9:\"_elements\";a:0:{}s:12:\"_elementPath\";a:1:{i:0;s:73:\"/home/content/79/8047279/build/26/libraries/joomla/html/parameter/element\";}s:17:\"_defaultNameSpace\";s:8:\"_default\";s:9:\"_registry\";a:1:{s:8:\"_default\";a:1:{s:4:\"data\";O:8:\"stdClass\":0:{}}}s:7:\"_errors\";a:0:{}}s:9:\"_errorMsg\";N;s:7:\"_errors\";a:0:{}}}');
+/*!40000 ALTER TABLE `jos_session` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_stats_agents`
+--
+
+DROP TABLE IF EXISTS `jos_stats_agents`;
+CREATE TABLE `jos_stats_agents` (
+  `agent` varchar(255) NOT NULL default '',
+  `type` tinyint(1) unsigned NOT NULL default '0',
+  `hits` int(11) unsigned NOT NULL default '1'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_stats_agents`
+--
+
+LOCK TABLES `jos_stats_agents` WRITE;
+/*!40000 ALTER TABLE `jos_stats_agents` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_stats_agents` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_templates_menu`
+--
+
+DROP TABLE IF EXISTS `jos_templates_menu`;
+CREATE TABLE `jos_templates_menu` (
+  `template` varchar(255) NOT NULL default '',
+  `menuid` int(11) NOT NULL default '0',
+  `client_id` tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (`menuid`,`client_id`,`template`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_templates_menu`
+--
+
+LOCK TABLES `jos_templates_menu` WRITE;
+/*!40000 ALTER TABLE `jos_templates_menu` DISABLE KEYS */;
+INSERT INTO `jos_templates_menu` VALUES ('education_opt_4_light_pink',0,0),('khepri',0,1);
+/*!40000 ALTER TABLE `jos_templates_menu` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_users`
+--
+
+DROP TABLE IF EXISTS `jos_users`;
+CREATE TABLE `jos_users` (
+  `id` int(11) NOT NULL auto_increment,
+  `name` varchar(255) NOT NULL default '',
+  `username` varchar(150) NOT NULL default '',
+  `email` varchar(100) NOT NULL default '',
+  `password` varchar(100) NOT NULL default '',
+  `usertype` varchar(25) NOT NULL default '',
+  `block` tinyint(4) NOT NULL default '0',
+  `sendEmail` tinyint(4) default '0',
+  `gid` tinyint(3) unsigned NOT NULL default '1',
+  `registerDate` datetime NOT NULL default '0000-00-00 00:00:00',
+  `lastvisitDate` datetime NOT NULL default '0000-00-00 00:00:00',
+  `activation` varchar(100) NOT NULL default '',
+  `params` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `usertype` (`usertype`),
+  KEY `idx_name` (`name`),
+  KEY `gid_block` (`gid`,`block`),
+  KEY `username` (`username`),
+  KEY `email` (`email`)
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_users`
+--
+
+LOCK TABLES `jos_users` WRITE;
+/*!40000 ALTER TABLE `jos_users` DISABLE KEYS */;
+INSERT INTO `jos_users` VALUES (62,'Josh Wickham','XerxesDGreat','josh@i-josh.com','0c52fd953f10fe8d1a2a4eeab18b9e0d:BKjURSQ6ITsyzOODqnWtSPhwNVHcP8Vj','Super Administrator',0,1,25,'2005-09-28 00:00:00','2011-09-26 02:33:41','','admin_language=\nlanguage=\neditor=\nhelpsite=\ntimezone=0\n\n'),(63,'Cora Fox','cora','cora@i-josh.com','c465ad4b1ef23e413f057212280e550f:FCjhWAnfaIf48Fja4bEp4XXEKHXHnPXW','Administrator',0,0,24,'2011-07-10 05:51:36','0000-00-00 00:00:00','','admin_language=en-GB\nlanguage=en-US\neditor=\nhelpsite=\ntimezone=0\n\n'),(64,'Shanin Fox','shanin_fox','shanin@i-josh.com','1aaa4af145e9dddea9efda0b2bf2e04f:QdGl91Mqh82mqLpiUhBTv7H2rijAt02h','Administrator',0,0,24,'2011-07-10 05:52:20','0000-00-00 00:00:00','','admin_language=\nlanguage=\neditor=\nhelpsite=\ntimezone=0\n\n'),(65,'Josh Wickham','facebook_crap','facebook_crap@i-josh.com','18adb525738c1cb5eced848dd2f7d1e2:gaAazvlLYlE11Xmhpd30ojcG1HZBzbi9','Registered',0,0,18,'2011-07-12 06:09:03','2011-11-08 15:31:38','','\n');
+/*!40000 ALTER TABLE `jos_users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `jos_weblinks`
+--
+
+DROP TABLE IF EXISTS `jos_weblinks`;
+CREATE TABLE `jos_weblinks` (
+  `id` int(11) unsigned NOT NULL auto_increment,
+  `catid` int(11) NOT NULL default '0',
+  `sid` int(11) NOT NULL default '0',
+  `title` varchar(250) NOT NULL default '',
+  `alias` varchar(255) NOT NULL default '',
+  `url` varchar(250) NOT NULL default '',
+  `description` text NOT NULL,
+  `date` datetime NOT NULL default '0000-00-00 00:00:00',
+  `hits` int(11) NOT NULL default '0',
+  `published` tinyint(1) NOT NULL default '0',
+  `checked_out` int(11) NOT NULL default '0',
+  `checked_out_time` datetime NOT NULL default '0000-00-00 00:00:00',
+  `ordering` int(11) NOT NULL default '0',
+  `archived` tinyint(1) NOT NULL default '0',
+  `approved` tinyint(1) NOT NULL default '1',
+  `params` text NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `catid` (`catid`,`published`,`archived`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jos_weblinks`
+--
+
+LOCK TABLES `jos_weblinks` WRITE;
+/*!40000 ALTER TABLE `jos_weblinks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `jos_weblinks` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2011-11-08 15:34:07

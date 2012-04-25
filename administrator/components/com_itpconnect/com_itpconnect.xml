@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<install type="component" version="1.5">
+<name>ITPConnect</name>
+<creationDate>December, 2010</creationDate>
+<author>Todor Iliev</author>
+<authorEmail>todor@itprism.com</authorEmail>
+<authorUrl>http://itprism.com</authorUrl>
+<copyright>Copyright (C) 2010 Todor Iliev ( ITPrism.com )</copyright>
+<license>http://www.gnu.org/copyleft/gpl.html</license>
+<version>1.3</version>
+<description>COM_ITPCONNECT_DESCRIPTION</description>
+
+<administration>
+	<menu img="components/com_itpconnect/assets/images/menu_itpconnect.gif" link="option=com_itpconnect&amp;controller=cpanel">ITP Connect</menu>
+	<submenu>
+	    <menu img="components/com_itpconnect/assets/images/menu_icon_cpanel.gif" link="option=com_itpconnect&amp;controller=cpanel">Control Panel</menu>
+	    <menu img="components/com_itpconnect/assets/images/menu_icon_settings.gif" link="option=com_itpconnect&amp;controller=settings">Settings</menu>
+		<menu img="components/com_itpconnect/assets/images/menu_icon_users.gif" link="option=com_itpconnect&amp;controller=users">Users</menu>
+	</submenu>
+	
+	<files folder="admin/components">		    		
+		<folder>assets</folder>
+		<folder>controllers</folder>
+		<folder>helpers</folder>
+		<folder>libraries</folder>
+		<folder>models</folder>
+		<folder>tables</folder>
+		<folder>views</folder>		
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>install.sql</filename>
+		<filename>install.php</filename>
+		<filename>itpconnect.php</filename>
+		<filename>params.xml</filename> 
+		<filename>uninstall.sql</filename>
+		<filename>uninstall.php</filename>
+    </files>
+	
+	<languages folder="admin">
+	    <language tag="en-GB">language/en-GB.com_itpconnect.ini</language>
+	</languages>
+</administration>
+
+    <install>
+        <sql>
+            <file driver="mysql" charset="utf8">install.sql</file>
+        </sql>
+    </install>
+
+    <uninstall>
+        <sql>
+            <file driver="mysql" charset="utf8">uninstall.sql</file>
+        </sql>
+    </uninstall>
+
+    <installfile>install.php</installfile>
+
+    <uninstallfile>uninstall.php</uninstallfile>
+    
+	<files folder="site/components">
+		<filename>controller.php</filename>
+		<filename>index.html</filename>
+		<filename>router.php</filename>
+		<filename>itpconnect.php</filename>
+		<folder>controllers</folder>
+		<folder>models</folder>
+		<folder>views</folder>
+	</files>
+
+	<languages folder="site">
+		<language tag="en-GB">language/en-GB.com_itpconnect.ini</language>
+	</languages>
+	
+  <plugins folder="site">
+    <plugin plugin="itpconnect" group="system" />
+	<plugin plugin="itpconnect" group="user" />
+	<plugin plugin="itpconnect" group="authentication" />
+  </plugins>
+  
+  <modules folder="site">
+    <module module="mod_itpconnect" />
+  </modules>
+	
+</install>

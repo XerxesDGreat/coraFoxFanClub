@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+<name>ITPConnect</name>
+<author>Todor Iliev</author>
+<creationDate>December, 2010</creationDate>
+<copyright>Copyright (C) 2010 Todor Iliev ( ITPrism.com )</copyright>
+<license>http://www.gnu.org/copyleft/gpl.html</license>
+<authorEmail>todor@itprism.com</authorEmail>
+<authorUrl>http://itprism.com</authorUrl>
+<version>1.3</version>
+<description>MOD_ITPCONNECT_DESC</description>
+	<files>
+		<filename module="mod_itpconnect">mod_itpconnect.php</filename>
+		<filename>index.html</filename>
+		<folder>tmpl</folder>
+	</files>
+	<params>
+        <param name="cache" type="list" default="1" label="Caching" description="Select whether to cache the content of this module">
+            <option value="0">Never</option>
+        </param>
+        <param name="@spacer" type="spacer" default="" label="" description="" />
+        <param name="moduleclass_sfx" type="text" default="" label="Module Class Suffix" description="PARAMMODULECLASSSUFFIX" />
+        <param name="pretext" type="textarea" cols="30" rows="5" default="" label="Pre-text" description="PARAMPRETEXT" />
+        <param name="posttext" type="textarea" cols="30" rows="5" label="Post-text" description="PARAMPOSTTEXT" />
+        <param name="login" type="menuitem" default="" disable="separator" label="Login Redirection URL" description="PARAMLOGINREDIRECTURL" state="1" />
+        <param name="logout" type="menuitem" default="" disable="separator" label="Logout Redirection URL" description="PARAMLOGOUTREDIRECTURL" state="1" />
+        <param name="greeting" type="radio" default="1" label="Greeting" description="Show/Hide the simple greeting text">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </param>
+        <param name="name" type="list" default="0" label="Name/Username">
+            <option value="0">Username</option>
+            <option value="1">Name</option>
+        </param>
+        <param name="usesecure" type="radio" default="0" label="Encrypt Login Form" description="Submit encrypted login data (requires SSL)">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </param>
+        <param name="@spacer2" type="spacer" default="############# FACEBOOK SETTINGS #############" label="" description="" />
+        <param name="fbShowImage" type="radio" default="0" label="MOD_ITPCONNECT_FB_SHOW_IMAGE" description="MOD_ITPCONNECT_FB_SHOW_IMAGE_DESC">
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </param>
+        <param name="fbImageSize" type="list" default="square" label="MOD_ITPCONNECT_FB_IMAGE_SIZE" description="MOD_ITPCONNECT_FB_IMAGE_SIZE_DESC">
+            <option value="square">Square</option>
+            <option value="small">Small</option>
+            <option value="large">Large</option>
+        </param>
+        <param name="fbPerms" type="textarea" cols="30" rows="5" default="email" label="MOD_ITPCONNECT_FB_PERMS" description="MOD_ITPCONNECT_FB_PERMS_DESC" />
+    </params>
+	<languages>
+        <language tag="en-GB">en-GB.mod_itpconnect.ini</language>
+    </languages>  
+</install>

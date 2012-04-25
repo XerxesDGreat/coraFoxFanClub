@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<metadata>
+	<layout title="Facebook">
+		<message>
+			<![CDATA[It is layout with information about login by Facebook]]>
+		</message>
+	</layout>
+	<state>
+        <name>Facebook layout</name>
+        <description>An information about login by Facebook.</description>
+        <url>
+            <param name="controller" type="hidden" default="facebook" />
+        </url>
+    </state>
+</metadata>

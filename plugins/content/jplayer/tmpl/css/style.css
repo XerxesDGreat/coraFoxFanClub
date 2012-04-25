@@ -1,0 +1,23 @@
+/*
+ * JPlayer for Joomla! 1.5
+ * Author: Max
+*/
+
+.jplayer {
+	clear: both;
+	font-size: 10px;
+}
+.jplayer-box {
+}
+.jplayer-text {
+	padding: 3px;
+}
+.jplayer-guest {
+	padding: 10px;
+	color: #0000FF;
+	background-color: #84A7DB;
+	border: 2px solid #0000FF;
+}
+.jplayer-poweredby {
+	margin-left: 10px;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install version="1.5" type="plugin" group="system">
+	<name>System - ITPConnect</name>
+	<author>Todor Iliev</author>
+	<authorEmail>todor@itprism.com</authorEmail>
+	<authorUrl>http://itprism.com</authorUrl>
+	<creationDate>December, 2010</creationDate>
+	<copyright>Copyright (C) 2010 Todor Iliev ( ITPrism.com )</copyright>
+	<license>http://www.gnu.org/copyleft/gpl.html</license>
+	<version>1.3</version>
+	<description>Add a code after the body tag. The code initializes the connection with services for authentication.</description>
+	<files>
+		<filename plugin="itpconnect">itpconnect.php</filename>
+	</files>
+	<params/>
+</install>
