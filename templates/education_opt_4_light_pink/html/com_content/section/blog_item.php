@@ -27,7 +27,7 @@ if ($item->params->get('show_title')) {
 	JW::out('</div><!-- end div.art-SubPostHeader -->', $indent);
 }
 
-$chunkKey = JW::startChunks('<div class="art-SubPostMetaData>');
+$chunkKey = JW::startChunks('<div class="art-SubPostMetaData">');
 if ($this->params->get('show_url') && $this->article->urls) {
 	JW::addChunk($chunkKey, '<a href="http://' . $item->urls . '" target="_blank">' . $item->urls . '</a>');
 }
@@ -85,7 +85,7 @@ if ($item->params->get('show_readmore') && $item->readmore) {
   <?php
    if ($item->readmore_register) {
     echo str_replace(' ', '&nbsp;', JText::_('Register to read more...'));
-   } elseif ($readmore = $item->params->get('readmore')){ 
+   } elseif ($readmore = $item->params->get('readmore')){
     echo str_replace(' ', '&nbsp;', $readmore);
    } else {
     echo str_replace(' ', '&nbsp;', JText::sprintf('Read more...'));

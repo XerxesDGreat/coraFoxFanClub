@@ -1,139 +1,123 @@
 <?php
 defined('_JEXEC') or die('Restricted access'); // no direct access
-$canEdit = ($this->user->authorize('com_content', 'edit', 'content', 'all') || $this->user->authorize('com_content', 'edit', 'content', 'own'));
-?>
-<?php if ($this->item->state == 0) : ?>
-<div class="system-unpublished">
-<?php endif; ?>
+$pathToFunctions = realpath(dirname(__FILE__) . '/../../../');
+require_once($pathToFunctions . DIRECTORY_SEPARATOR . 'functions.php');
+require_once($pathToFunctions . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'jw.php');
 
-<div class="art-Post">
-    <div class="art-Post-tl"></div>
-    <div class="art-Post-tr"></div>
-    <div class="art-Post-bl"></div>
-    <div class="art-Post-br"></div>
-    <div class="art-Post-tc"></div>
-    <div class="art-Post-bc"></div>
-    <div class="art-Post-cl"></div>
-    <div class="art-Post-cr"></div>
-    <div class="art-Post-cc"></div>
-    <div class="art-Post-body">
-<div class="art-Post-inner">
-<?php
-artxFragmentBegin("<div class=\"art-PostMetadataHeader\">\r\n");
-if ($this->item->params->get('show_title')) {
- ob_start();
-?>
- <h2 class="art-PostHeader"> 
-<?php
- artxFragmentBegin(ob_get_clean());
- if ($this->item->params->get('link_titles') && $this->item->readmore_link != '')
-  artxFragmentContent('<a href="' . $this->item->readmore_link . '" class="PostHeader">' . $this->escape($this->item->title) . '</a>');
- else
-  artxFragmentContent($this->escape($this->item->title));
- ob_start();
-?>
+// shortcuts
+$item = $this->item;
+$params = $item->params;
 
-</h2>
+$indent = 0;
 
-<?php
- artxFragmentEnd(ob_get_clean());
+// check for publish status
+if ($this->item->state == 0) {
+	JW::out('<div class="system-unpublished">', $indent);
 }
-artxFragmentEnd("\r\n</div>\r\n");
-artxFragmentBegin("<div class=\"art-PostHeaderIcons art-metadata-icons\">\r\n");
-  if ($this->params->get('show_url') && $this->article->urls)
-    artxFragment('', '<a href="http://' . $this->item->urls . '" target="_blank">' . $this->item->urls . '</a>', '', ' | ');
-if ($this->item->params->get('show_create_date')) {
-artxFragment('', JHTML::_('date', $this->item->created, JText::_('DATE_FORMAT_LC2')), '', ' | ');
-}
-if (($this->item->params->get('show_author')) && ($this->item->author != "")) {
-  artxFragment('', JText::sprintf('Written by', ($this->item->created_by_alias ? $this->item->created_by_alias : $this->item->author)), '', ' | ');
-}
-if ($this->item->params->get('show_pdf_icon'))
-  artxFragment('', JHTML::_('icon.pdf', $this->item, $this->item->params, $this->access), '', ' | ');
-if ($this->item->params->get('show_print_icon'))
-  artxFragment('', JHTML::_('icon.print_popup', $this->item, $this->item->params, $this->access), '', ' | ');
-if ($this->item->params->get('show_email_icon'))
-  artxFragment('', JHTML::_('icon.email', $this->item, $this->item->params, $this->access), '', ' | ');
-if ($canEdit)
-  artxFragment('', JHTML::_('icon.edit', $this->item, $this->item->params, $this->access), '', ' | ');
-artxFragmentEnd("\r\n</div>\r\n");
-echo "<div class=\"art-PostContent\">\r\n";
-if (!$this->item->params->get('show_intro'))
- echo $this->item->event->afterDisplayTitle;
-echo $this->item->event->beforeDisplayContent;
-if (($this->item->params->get('show_section') && $this->item->sectionid) || ($this->item->params->get('show_category') && $this->item->catid)) {
-?>
-<table class="contentpaneopen<?php echo $this->item->params->get('pageclass_sfx' ); ?>">
-<tr>
- <td>
-<?php
-if ($this->item->params->get('show_section') && $this->item->sectionid && isset($this->item->section)) {
- echo "<span>";
- if ($this->item->params->get('link_section'))
-  echo '<a href="'.JRoute::_(ContentHelperRoute::getSectionRoute($this->item->sectionid)).'">';
- echo $this->item->section;
- if ($this->item->params->get('link_section'))
-  echo '</a>';
- if ($this->item->params->get('show_category'))
-  echo ' - ';
- echo "</span>";
-}
-if ($this->item->params->get('show_category') && $this->item->catid) {
- echo "<span>";
- if ($this->item->params->get('link_category'))
-  echo '<a href="'.JRoute::_(ContentHelperRoute::getCategoryRoute($this->item->catslug, $this->item->sectionid)).'">';
- echo $this->item->category;
- if ($this->item->params->get('link_category'))
-  echo '</a>';
- echo "</span>";
-}
-?>
- </td>
-</tr>
-</table>
-<?php
-}
-if (isset ($this->item->toc))
- echo $this->item->toc;
-echo "<div class=\"art-article\">", $this->item->text, "</div>";
-if (intval($this->item->modified) != 0 && $this->item->params->get('show_modify_date')) {
- echo "<p class=\"modifydate\">";
- echo JText::_('Last Updated') . ' (' . JHTML::_('date', $this->item->modified, JText::_('DATE_FORMAT_LC2')) . ')';
- echo "</p>";
-}
-if ($this->item->params->get('show_readmore') && $this->item->readmore) {
-?>
-<p>
- <span class="art-button-wrapper">
-  <span class="l"> </span>
-  <span class="r"> </span>
-  <a class="readon art-button" href="<?php echo $this->item->readmore_link; ?>">
-  <?php
-   if ($this->item->readmore_register) {
-    echo str_replace(' ', '&nbsp;', JText::_('Register to read more...'));
-   } elseif ($readmore = $this->item->params->get('readmore')){ 
-    echo str_replace(' ', '&nbsp;', $readmore);
-   } else {
-    echo str_replace(' ', '&nbsp;', JText::sprintf('Read more...'));
-   }
-  ?>
-  </a>
- </span>
-</p>
-<?php
-}
-echo "<span class=\"article_separator\">&nbsp;</span>";
-echo $this->item->event->afterDisplayContent;
-echo "\r\n</div>\r\n<div class=\"cleared\"></div>\r\n";
-?>
 
-</div>
+JW::out('<div class="art-Post">', $indent ++);
 
-		<div class="cleared"></div>
-    </div>
-</div>
+// title/header section
+if ($params->get('show_title')) {
+	JW::out('<h2 class="art-PostHeader">', $indent ++);
 
+	if ($params->get('link_titles') && $item->readmore_link != '') {
+		JW::out('<a href="' . $item->readmore_link . '" class="PostHeader">' . $this->escape($item->title) . '</a>', $indent --);
+	} else {
+		JW::out($this->escape($item->title, $indent --));
+	}
 
-<?php if ($this->item->state == 0) : ?>
-</div>
-<?php endif; ?>
+	JW::out('</h2>', $indent);
+}
+
+// metadata section
+$chunkKey = JW::startChunks('<div class="art-PostMetaData>');
+if ($params->get('show_url') && $this->article->urls) {
+	JW::addChunk($chunkKey, '<a href="http://' . $item->urls . '" target="_blank">' . $item->urls . '</a>');
+}
+if ($params->get('show_create_date')) {
+	JW::addChunk($chunkKey, JHTML::_('date', $item->created, JText::_('DATE_FORMAT_LC2')));
+}
+if (($params->get('show_author')) && ($item->author != "")) {
+	JW::addChunk($chunkKey, JText::sprintf('Written by', ($item->created_by_alias ? $item->created_by_alias : $item->author)));
+}
+if ($params->get('show_pdf_icon')) {
+	JW::addChunk($chunkKey, JW::getIcon('pdf', $this));
+}
+if ($params->get('show_print_icon')) {
+	JW::addChunk($chunkKey, JW::getIcon('print_popup', $this));
+}
+if ($params->get('show_email_icon')) {
+	JW::addChunk($chunkKey, JW::getIcon('email', $this));
+}
+if (JW::canEdit($this->user)) {
+	JW::addChunk($chunkKey, JW::getIcon('edit', $this));
+}
+JW::endChunks($chunkKey, "</div><!-- end div.art-PostMetaData -->");
+JW::out(JW::getAndClearChunks($chunkKey, ' | '), $indent);
+
+// begin content
+JW::out('<div class="art-PostContent">', $indent ++);
+
+// introduction and pre-content content (e.g. ads)
+if (!$params->get('show_intro')) {
+	JW::out($item->event->afterDisplayTitle, $indent);
+}
+JW::out($item->event->beforeDisplayContent, $indent);
+
+// section/category links
+if (JW::shouldShowSection($item) || JW::shouldShowCategory($item)) {
+	$class = 'contentpaneopen' . $params->get('pageclass_sfx');
+	$chunkKey = JW::startChunks("<div class=\"{$class}\">");
+	JW::addChunk($chunkKey, JW::getSectionHTML($item));
+	JW::addChunk($chunkKey, JW::getCategoryHTML($item));
+	JW::endChunks($chunkKey, "</div><!-- end div.{$class} -->");
+	JW::out(JW::getAndClearChunks($chunkKey), $indent);
+}
+
+// table of contents
+if (isset ($item->toc)) {
+	JW::out($item->toc, $indent);
+}
+
+// article
+JW::out('<div class="art-article">', $indent ++);
+JW::out($item->text, $indent --);
+JW::out('</div><!-- end div.art-article -->', $indent);
+
+// modification date
+if (intval($item->modified) != 0 && $params->get('show_modify_date')) {
+	JW::out('<p class=\"modifydate\">', $indent++);
+	JW::out(JText::_('Last Updated') . ' (' . JHTML::_('date', $this->item->modified, JText::_('DATE_FORMAT_LC2')) . ')', $indent --);
+	JW::out("</p>", $indent);
+}
+
+// read more button.
+// @todo change this into a button
+if ($params->get('show_readmore') && $item->readmore) {
+	JW::out('<p>', $indent ++);
+	JW::out('<span class="art-button-wrapper">', $indent ++);
+	JW::out('<span class="l"> </span>', $indent);
+	JW::out('<span class="r"> </span>', $indent);
+	JW::out('<a class="readon art-button" href="' . $item->readmore_link . '">', $indent ++);
+	if ($item->readmore_register) {
+		JW::out(str_replace(' ', '&nbsp;', JText::_('Register to read more...')), $indent --);
+	} else if ($params->get('readmore')){
+		JW::out(str_replace(' ', '&nbsp;', $params->get('readmore')), $indent --);
+	} else {
+		JW::out(str_replace(' ', '&nbsp;', JText::sprintf('Read more...')), $indent --);
+	}
+	JW::out('</a>', $indent --);
+	JW::out('</span>', $indent --);
+	JW::out('</p>', $indent --);
+}
+
+JW::out('<span class="article_separator">&nbsp;</span>', $indent);
+JW::out($item->event->afterDisplayContent, $indent --);
+JW::out('</div><!-- end div.art-PostContent -->', $indent);
+JW::out('<div class="cleared"> </div>', $indent --);
+JW::out('</div><!-- end div.art-Post -->', $indent);
+
+if ($this->item->state == 0) {
+	JW::out('</div><!-- end div.system-unpublished -->', $indent);
+}

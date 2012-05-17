@@ -1,14 +1,16 @@
 <?php
 defined('_JEXEC') or die('Restricted access'); // no direct access
-$pathToFunctions = dirname(__FILE__) . str_replace('/', DIRECTORY_SEPARATOR, '/../../../');
-require_once("{$pathToFunctions}functions.php");
-require_once("{$pathToFunctions}jw_functions.php");
+$pathToFunctions = realpath(dirname(__FILE__) . '/../../../');
+require_once($pathToFunctions . DIRECTORY_SEPARATOR . 'functions.php');
+require_once($pathToFunctions . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'jw.php');
 
 // set up some shortcuts
 $cparams = JComponentHelper::getParams('com_media');
 $params = $this->params;
 $section = $this->section;
 $pagination = $this->pagination;
+$numLeadingArticles = $params->get('num_leading_articles', 1);
+$numIntroArticles = $params->get('num_intro_articles', 4);
 
 // begin page output
 JW::out('<div class="art-Post">');
@@ -21,9 +23,7 @@ if ($params->def('show_page_title', 1)) {
 }
 
 // description and/or image
-if (JW::shouldShowDescriptionImage($this)
-	|| JW::shouldShowDescription($this)
-) {
+if (JW::shouldShowDescriptionImage($this) || JW::shouldShowDescription($this)) {
 	JW::out('<div class="art-PostContent">', 1);
 	if (JW::shouldShowDescriptionImage($this)) {
 		$imagePath = $cparams->get('image_path');
@@ -40,10 +40,9 @@ if (JW::shouldShowDescriptionImage($this)
 
 // any leading articles
 $articleStart = $pagination->limitstart;
-if ($params->def('num_leading_articles', 1)) {
+if ($numLeadingArticles) {
 	JW::out('<div class="blog' . $params->get('pageclass_sfx') . '">', 1);
-	$maxIterations = $articleStart + $params->get('num_leading_articles');
-	$pageLimit = $articleStart + $params->get('num_leading_articles');
+	$pageLimit = $articleStart + $numLeadingArticles;
 	for ($i = $articleStart; $i < $pageLimit; $i ++, $articleStart ++) {
 		if ($i >= $this->total) {
 			break;
@@ -58,28 +57,26 @@ if ($params->def('num_leading_articles', 1)) {
 }
 
 // introductive articles
-$startIntroArticles = $articleStart + $params->get('num_leading_articles');
-$numIntroArticles = $startIntroArticles + $params->get('num_intro_articles', 4);
+$startIntroArticles = $articleStart + $numLeadingArticles;
+$numIntroArticles = $startIntroArticles + $numIntroArticles;
 if (($numIntroArticles != $startIntroArticles) && ($articleStart < $this->total)) {
 	JW::out('<div>', 1);
-	$divider = '';
+	$class = 'articleColumn';
 	// check the columns to determine the layout
 	$numColumns = $params->get('num_columns', 2);
+
 	if ($params->get('multi_column_order')) { // order across, like front page
 		for ($z = 0; $z < $numColumns; $z ++) {
-			if ($z > 0) {
-				$divider = " column_separator";
-			}
+			$class .= $z > 0 ? ' column_separator' : '';
 			// put the opening container together
 			$rows = floor($numIntroArticles / $numColumns);
 			$cols = ($numIntroArticles % $numColumns);
-			$class = "article_column{$divider}";
 			$width = floor(100 / $numColumns) . "%";
 			JW::out("<div class=\"{$class}\" width=\"{$width}\">", 2);
 
 			// add the articles
 			$loopLength = (($z < $cols) ? 1 : 0) + $rows;
-			for ($y = 0; $y < $loopLength; $y ++) {
+			for ($y = $numLeadingArticles; $y < $loopLength; $y ++) {
 				$target = $i + ($y * $numColumns) + $z;
 				if ($target < $this->total && $target < $numIntroArticles) {
 					$this->item =& $this->getItem($target, $this->params);
@@ -89,26 +86,23 @@ if (($numIntroArticles != $startIntroArticles) && ($articleStart < $this->total)
 			JW::out("</div><!-- end div.{$class} -->", 2);
 		}
 
-		$articleStart += $numIntroArticles; 
+		$articleStart += $numIntroArticles;
 	} else { // otherwise, order down, same as before (default behaviour)
 		for ($z = 0; $z < $numColumns; $z ++) {
-			if ($z > 0) {
-				$divider = " column_separator";
-			}
-			
-			$class = "article_column{$divider}";
+			$class .= $z > 0 ? ' column_separator' : '';
+
 			$width = floor(100 / $numColumns) . "%";
 			JW::out("<div class=\"{$class}\" width=\"{$width}\">", 2);
 
 			$loopLength = floor($numIntroArticles / $numColumns);
-			for ($y = 0; $y < $loopLength; $y ++) {
+			for ($y = $numLeadingArticles; $y < $loopLength; $y ++) {
 				if ($articleStart < $this->total && $articleStart < $numIntroArticles) {
-					$this->item =& $this->getItem($i, $this->params);
+					$this->item =& $this->getItem($y, $this->params);
 					JW::out($this->loadTemplate('item'), 3);
 					$articleStart ++;
 				}
 			}
-			JW::out("</div><!-- end div.{$class} -->", 2);
+			JW::out("</div><!-- end div.{$class} asdfasdf -->", 2);
 		}
 	}
 	JW::out("</div><!-- end generic div -->", 1);

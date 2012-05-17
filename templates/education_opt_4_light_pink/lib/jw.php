@@ -1,4 +1,5 @@
 <?php
+require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'chunk_helper.php');
 /**
  * A set of helper functions for the various template pages.
  * This class was originally created to centralize functionality for a
@@ -16,7 +17,7 @@ final class JW {
 	 * icon HTML strings
 	 */
 	private static $validIconTypes = array (
-		'pdf', 'print_popup', 'email', 'edit' 
+		'pdf', 'print_popup', 'email', 'edit'
 	);
 
 	private static $chunkHeaders = array();
@@ -54,6 +55,11 @@ final class JW {
 		return false;
 	}
 
+	/**
+	 * whether or not to show the section based on section settings
+	 * @param type $item
+	 * @return boolean
+	 */
 	public static function shouldShowSection ($item) {
 		if ($item->params->get('show_section') && $item->sectionid
 			&& isset($item->section)
@@ -91,7 +97,7 @@ final class JW {
 		if (!self::shouldShowCategory($item)) {
 			return $output;
 		}
-		
+
 		$output = $item->category;
 		$hasLink = $item->params->get('link_category');
 		if ($hasLink) {
@@ -157,8 +163,19 @@ final class JW {
 	}
 
 	/**
+	 * shortcut method for getting the author string to go in article metadata
+	 * @param $item the item we're rendering
+	 * @param String $prefix introduction text to the author's name
+	 * @return String
+	 */
+	public static function getAuthorString ($item, $prefix = 'Written by') {
+		$name = $item->created_by_alias ? $item->created_by_alias : $item->author;
+		return JText::sprintf($prefix, $name);
+	}
+
+	/**
 	 * Builds a post div with the possibility of a header and a body portion
-	 * and returns the HTML string for the div.  Will indent based on the 
+	 * and returns the HTML string for the div.  Will indent based on the
 	 * requested indent level and plug in the class passed through
 	 *
 	 * @param STRING $title the title of the post [null]
@@ -229,42 +246,9 @@ final class JW {
 	 * @return STRING
 	 */
 	public static function startChunks ($header) {
-		$key = uniqid();
-		self::initializeChunkHolders($key);
-		self::$chunkHeaders[$key] = $header;
-		return $key;
-	}
-
-	/**
-	 * Initializes the container for the chunks
-	 *
-	 * @param STRING $key the key to the chunks
-	 * @return VOID
-	 */
-	private static function initializeChunkHolders ($key) {
-		self::$chunkHeaders[$key] = '';
-		self::$chunks[$key] = array();
-		self::$chunkFooters[$key] = '';
-	}
-
-	/**
-	 * Checks the given key to see that it is likely to be good and
-	 * also checks to see that the chunk container is already set initialized.
-	 * If it isn't initialized, initialize the chunk container.
-	 *
-	 * @param STRING $key the key to the chunks
-	 * @return BOOL
-	 */
-	private static function checkChunksAndKey ($key) {
-		if (empty($key)) {
-			error_log(__METHOD__ . " must pass a key");
-			return false;
-		}
-		if (!isset(self::$chunkHeaders[$key])) {
-			error_log(__METHOD__ . " the chunk for {$key} was not initialized");
-			self::initializeChunkHolders($key);
-		}
-		return true;
+		$chunk = ChunkHelper::startNew();
+		$chunk->setHeader($header);
+		return $chunk->getId();
 	}
 
 	/**
@@ -275,10 +259,7 @@ final class JW {
 	 * @return VOID
 	 */
 	public static function addChunk ($key, $string) {
-		if (!self::checkChunksAndKey($key)) {
-			return;
-		}
-		self::$chunks[$key][] = $string;
+		ChunkHelper::get($key)->addChunk($string);
 	}
 
 	/**
@@ -289,10 +270,7 @@ final class JW {
 	 * @return VOID
 	 */
 	public static function endChunks ($key, $string) {
-		if (!self::checkChunksAndKey($key)) {
-			return;
-		}
-		self::$chunkFooters[$key][] = $string;
+		ChunkHelper::get($key)->setFooter($string);
 	}
 
 	/**
@@ -304,13 +282,7 @@ final class JW {
 	 * @return STRING
 	 */
 	public static function getChunks ($key, $separator) {
-		if (!self::checkChunksAndKey($key)) {
-			return;
-		}
-		$output = self::$chunkHeaders[$key];
-		$output .= implode($separator, self::$chunks[$key]);
-		$output .= self::$chunkFooters[$key];
-		return $output;
+		return ChunkHelper::get($key)->getComposite($separator);
 	}
 
 	/**
@@ -320,9 +292,7 @@ final class JW {
 	 * @return VOID
 	 */
 	public static function clearChunks ($key) {
-		unset(self::$chunkHeaders[$key]);
-		unset(self::$chunks[$key]);
-		unset(self::$chunkFooters[$key]);
+		ChunkHelper::clear($key);
 	}
 
 	/**
