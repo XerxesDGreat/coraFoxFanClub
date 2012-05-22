@@ -15,6 +15,8 @@ all: php-lint
 
 deploy: php-lint compress push clean-deploy
 
+buildNo: echo $(BUILD_NO)
+
 ####################################################
 # php lint
 ####################################################
@@ -35,9 +37,7 @@ $(PHP_FILES:%=build/%.php-lint-ok): build/%.php-lint-ok: %
 .PHONY: compress
 
 compress: php-lint clean-compress
-	svn up
-	svn export . build/$(BUILD_NO)
-	tar -czf build/$(BUILD_NO).tar --directory build/ $(BUILD_NO)
+	tar -czf build/$(BUILD_NO).tar --exclude=".git" --directory build/ $(BUILD_NO)
 
 ####################################################
 # pull db

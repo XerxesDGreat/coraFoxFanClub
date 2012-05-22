@@ -33,7 +33,7 @@ final class JW {
 	 */
 	public static function shouldShowDescriptionImage (ContentView $page) {
 		if ($page->params->get('show_description_image')
-			&& $this->section->image) {
+			&& $page->section->image) {
 			return true;
 		}
 
@@ -48,7 +48,7 @@ final class JW {
 	 * @return BOOL
 	 */
 	public static function shouldShowDescription (ContentView $page) {
-		if ($page->params->get('show_description') && $this->section->description) {
+		if ($page->params->get('show_description') && $page->section->description) {
 			return true;
 		}
 
