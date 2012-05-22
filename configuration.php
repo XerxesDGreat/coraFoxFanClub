@@ -56,11 +56,13 @@ class JConfig {
 	var $offline_message = 'Cora&#039;s awesomeness has brought the site down, but we will be back online soon!';
 
 	public function __construct () {
-		if (isset($_SERVER['SERVER_NAME']) && $_SERVER['SERVER_NAME'] == 'localhost') {
-			$this->host = 'localhost';
-			$this->user = 'root';
-			$this->password = 'eef5reid';
-		}	
-	}
+        if (file_exists(dirname(__FILE__) . '/localConfig.php')) {
+            include_once(dirname(__FILE__) . '/localConfig.php');
+            if (defined('LOCAL_MODE') && LOCAL_MODE) {
+                $this->host = DB_HOST;
+                $this->user = DB_USER;
+                $this->password = DB_PASSWORD;
+            }
+        }
+    }
 }
-?>
