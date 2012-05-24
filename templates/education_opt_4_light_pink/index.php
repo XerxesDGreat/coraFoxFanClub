@@ -1,4 +1,8 @@
 <?php
+/**
+ * This file is the main canvas for the website; it's upon this page which all
+ * the subtemplates get drafted and combined.
+ */
 defined('_JEXEC') or die('Restricted access'); // no direct access
 require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'functions.php';
 $document = null;
@@ -68,9 +72,7 @@ if (artxHasMessages()) {
 	echo artxPost(null, '<jdoc:include type="message" />');
 }
 ?>
-before component
 							<jdoc:include type="component" />
-after component
 <?php
 echo artxModules($document, 'banner4', 'art-nostyle');
 echo artxPositions($document, array('user4', 'user5'), 'art-article');
@@ -94,5 +96,5 @@ echo artxPositions($document, array('bottom1', 'bottom2', 'bottom3'), 'art-block
 				<div class="cleared"></div>
 			</div>
 		</div>
-	</body> 
+	</body>
 </html>
