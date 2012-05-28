@@ -15,7 +15,8 @@ all: php-lint
 
 deploy: php-lint compress push clean-deploy
 
-buildNo: echo $(BUILD_NO)
+buildNo:
+	echo $(BUILD_NO)
 
 ####################################################
 # php lint
