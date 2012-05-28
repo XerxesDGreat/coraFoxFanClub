@@ -3,9 +3,9 @@
 ####################################################
 PHP_FILES := $(shell find . -name '*.php' | grep -v "\/build\/")
 BUILD_NO := $(shell ./scripts/getBuildNo.sh)
-SSH_PATH := "cora4793@corafoxfanclub.com"
-PROD_DB := "corajoomla15.db.8047279.hostedresource.com"
-DB_NAME := "corajoomla15"
+SSH_PATH := cora4793@corafoxfanclub.com
+PROD_DB := corajoomla15.db.8047279.hostedresource.com
+DB_NAME := corajoomla15
 TAR_FILE_NAME := $(BUILD_NO).tar
 LOCAL_TAR_FILE := /tmp/$(TAR_FILE_NAME)
 REMOTE_TAR_FILE := build/$(TAR_FILE_NAME)
@@ -38,7 +38,7 @@ $(PHP_FILES:%=build/%.php-lint-ok): build/%.php-lint-ok: %
 .PHONY: compress
 
 compress: #php-lint clean-compress
-	tar -czf $(LOCAL_TAR_FILE) --exclude=".git" *
+	tar -czvf $(LOCAL_TAR_FILE) --exclude=".git" *
 
 ####################################################
 # pull db
@@ -71,7 +71,7 @@ update-local-db:
 
 push: compress
 	scp $(LOCAL_TAR_FILE) $(SSH_PATH):~/$(REMOTE_TAR_FILE)
-	ssh $(SSH_PATH) 'tar -xzf $(REMOTE_TAR_FILE) -C build/; \
+	ssh $(SSH_PATH) 'tar -xzvf $(REMOTE_TAR_FILE) -C build/; \
 		chmod +x ./build/$(BUILD_NO)/scripts/setup.sh; \
 		./build/$(BUILD_NO)/scripts/setup.sh $(BUILD_NO); \
 		ln -nfs ~/build/$(BUILD_NO) ~/html'
