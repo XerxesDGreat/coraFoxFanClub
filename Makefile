@@ -71,11 +71,11 @@ update-local-db:
 
 push: compress
 	scp $(LOCAL_TAR_FILE) $(SSH_PATH):~/$(REMOTE_TAR_FILE)
-	ssh $(SSH_PATH) 'mkdir build/$(BUILD_NO); \
-		pushd build/$(BUILD_NO); \
-		tar -xzvf $(REMOTE_TAR_FILE) -C build/$(BUILD_NO); \
-		chmod +x ./build/$(BUILD_NO)/scripts/setup.sh; \
-		./build/$(BUILD_NO)/scripts/setup.sh $(BUILD_NO); \
+	ssh $(SSH_PATH) 'mkdir ~/build/$(BUILD_NO); \
+		pushd ~/build/$(BUILD_NO); \
+		tar -xzvf ~/build/$(REMOTE_TAR_FILE); \
+		chmod +x ~/build/$(BUILD_NO)/scripts/setup.sh; \
+		~/build/$(BUILD_NO)/scripts/setup.sh $(BUILD_NO); \
 		ln -nfs ~/build/$(BUILD_NO) ~/html'
 
 ####################################################
