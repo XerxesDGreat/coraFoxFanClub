@@ -37,7 +37,7 @@ $(PHP_FILES:%=build/%.php-lint-ok): build/%.php-lint-ok: %
 ####################################################
 .PHONY: compress
 
-compress: #php-lint clean-compress
+compress: php-lint clean-compress
 	tar -czvf $(LOCAL_TAR_FILE) --exclude=".git" *
 
 ####################################################
@@ -71,7 +71,9 @@ update-local-db:
 
 push: compress
 	scp $(LOCAL_TAR_FILE) $(SSH_PATH):~/$(REMOTE_TAR_FILE)
-	ssh $(SSH_PATH) 'tar -xzvf $(REMOTE_TAR_FILE) -C build/; \
+	ssh $(SSH_PATH) 'mkdir build/$(BUILD_NO); \
+		pushd build/$(BUILD_NO); \
+		tar -xzvf $(REMOTE_TAR_FILE) -C build/$(BUILD_NO); \
 		chmod +x ./build/$(BUILD_NO)/scripts/setup.sh; \
 		./build/$(BUILD_NO)/scripts/setup.sh $(BUILD_NO); \
 		ln -nfs ~/build/$(BUILD_NO) ~/html'
