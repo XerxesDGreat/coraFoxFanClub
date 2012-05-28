@@ -95,6 +95,6 @@ echo artxPositions($document, array('bottom1', 'bottom2', 'bottom3'), 'art-block
 				</div><!-- end div.art-Footer -->
 				<div class="cleared"></div>
 			</div>
-		</div>
+		</div><!-- make sure it's working -->
 	</body>
 </html>
