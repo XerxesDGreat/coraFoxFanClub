@@ -6,9 +6,9 @@ BUILD_NO := $(shell ./scripts/getBuildNo.sh)
 SSH_PATH := "cora4793@corafoxfanclub.com"
 PROD_DB := "corajoomla15.db.8047279.hostedresource.com"
 DB_NAME := "corajoomla15"
-TAR_FILE_NAME := "$(BUILD_NO).tar"
-LOCAL_TAR_FILE := "/tmp/$(TAR_FILE_NAME)"
-REMOTE_TAR_FILE := "~/build/$(TAR_FILE_NAME)"
+TAR_FILE_NAME := $(BUILD_NO).tar
+LOCAL_TAR_FILE := /tmp/$(TAR_FILE_NAME)
+REMOTE_TAR_FILE := build/$(TAR_FILE_NAME)
 
 ####################################################
 # generic sources
@@ -70,7 +70,7 @@ update-local-db:
 .PHONY: push
 
 push: compress
-	scp $(LOCAL_TAR_FILE) $(SSH_PATH):$(REMOTE_TAR_FILE)
+	scp $(LOCAL_TAR_FILE) $(SSH_PATH):~/$(REMOTE_TAR_FILE)
 	ssh $(SSH_PATH) 'tar -xzf $(REMOTE_TAR_FILE) -C build/; \
 		chmod +x ./build/$(BUILD_NO)/scripts/setup.sh; \
 		./build/$(BUILD_NO)/scripts/setup.sh $(BUILD_NO); \
