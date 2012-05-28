@@ -7,7 +7,7 @@ SSH_PATH := "cora4793@corafoxfanclub.com"
 PROD_DB := "corajoomla15.db.8047279.hostedresource.com"
 DB_NAME := "corajoomla15"
 TAR_FILE_NAME := "$(BUILD_NO).tar"
-LOCAL_TAR_FILE := "/tmp/${JOB_NAME}/$(TAR_FILE_NAME)"
+LOCAL_TAR_FILE := "/tmp/$(TAR_FILE_NAME)"
 REMOTE_TAR_FILE := "~/build/$(TAR_FILE_NAME)"
 
 ####################################################
@@ -38,7 +38,6 @@ $(PHP_FILES:%=build/%.php-lint-ok): build/%.php-lint-ok: %
 .PHONY: compress
 
 compress: #php-lint clean-compress
-	if [[ ! -d /tmp/${JOB_NAME}/ ]]; then mkdir ${JOB_NAME}; fi;
 	tar -czf $(LOCAL_TAR_FILE) --exclude=".git" *
 
 ####################################################
